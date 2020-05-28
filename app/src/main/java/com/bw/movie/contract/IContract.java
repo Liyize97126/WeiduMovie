@@ -1,5 +1,6 @@
 package com.bw.movie.contract;
 
+import java.lang.reflect.Type;
 import java.util.Map;
 
 /**
@@ -11,13 +12,13 @@ public interface IContract {
     //Model
     interface IModel {
         //Get
-        void getRequest(String url, Class cls, Map<String, Object> map, ModelCallBack modelCallBack);
+        void getRequest(String url, Type type, Map<String, Object> map, ModelCallBack modelCallBack);
         //Post
-        void postRequest(String url, Class cls, Map<String, Object> map, ModelCallBack modelCallBack);
+        void postRequest(String url, Type type, Map<String, Object> map, ModelCallBack modelCallBack);
     }
     //Presenter
     interface IPresenter {
-        void startRequest(int method, String url, Class cls, Map<String, Object> map);
+        void startRequest(int method, String url, Type type, Map<String, Object> map);
     }
     //View
     interface IView<T> {

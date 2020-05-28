@@ -3,6 +3,7 @@ package com.bw.movie.model;
 import com.bw.movie.contract.IContract;
 import com.bw.movie.util.NetUtil;
 
+import java.lang.reflect.Type;
 import java.util.Map;
 
 /**
@@ -12,9 +13,9 @@ import java.util.Map;
  */
 public class ModelImpl implements IContract.IModel {
     @Override
-    public void getRequest(String url, Class cls, Map<String, Object> map, final IContract.ModelCallBack modelCallBack) {
+    public void getRequest(String url, Type type, Map<String, Object> map, final IContract.ModelCallBack modelCallBack) {
         //发起请求
-        NetUtil.getInstance().getRequest(url, cls, map, new NetUtil.NetCallBack() {
+        NetUtil.getInstance().getRequest(url, type, map, new NetUtil.NetCallBack() {
             @Override
             public void onSuccess(Object o) {
                 if(modelCallBack != null){
@@ -30,9 +31,9 @@ public class ModelImpl implements IContract.IModel {
         });
     }
     @Override
-    public void postRequest(String url, Class cls, Map<String, Object> map, final IContract.ModelCallBack modelCallBack) {
+    public void postRequest(String url, Type type, Map<String, Object> map, final IContract.ModelCallBack modelCallBack) {
         //发起请求
-        NetUtil.getInstance().getRequest(url, cls, map, new NetUtil.NetCallBack() {
+        NetUtil.getInstance().getRequest(url, type, map, new NetUtil.NetCallBack() {
             @Override
             public void onSuccess(Object o) {
                 if(modelCallBack != null){

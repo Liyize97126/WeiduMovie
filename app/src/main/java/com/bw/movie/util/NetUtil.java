@@ -11,6 +11,7 @@ import com.bw.movie.url.MyUrl;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -88,7 +89,7 @@ public class NetUtil {
         return Holder.NET_UTIL;
     }
     //GET请求方法
-    public void getRequest(String url, final Class cls, Map<String, Object> map, final NetCallBack netCallBack){
+    public void getRequest(String url, final Type type, Map<String, Object> map, final NetCallBack netCallBack){
         Observable<ResponseBody> request;
         //判断
         if(map != null){
@@ -108,7 +109,7 @@ public class NetUtil {
                     public void onNext(ResponseBody responseBody) {
                         try {
                             String string = responseBody.string();
-                            Object o = MyApplication.getGson().fromJson(string, cls);
+                            Object o = MyApplication.getGson().fromJson(string, type);
                             if(netCallBack != null){
                                 netCallBack.onSuccess(o);
                             }
@@ -131,7 +132,7 @@ public class NetUtil {
                 });
     }
     //POST请求方法
-    public void postRequest(String url, final Class cls, Map<String, Object> map, final NetCallBack netCallBack){
+    public void postRequest(String url, final Type type, Map<String, Object> map, final NetCallBack netCallBack){
         Observable<ResponseBody> request = mApiService.postRequest(url,map);
         //判断
         /*if(map != null){
@@ -151,7 +152,7 @@ public class NetUtil {
                     public void onNext(ResponseBody responseBody) {
                         try {
                             String string = responseBody.string();
-                            Object o = MyApplication.getGson().fromJson(string, cls);
+                            Object o = MyApplication.getGson().fromJson(string, type);
                             if(netCallBack != null){
                                 netCallBack.onSuccess(o);
                             }

@@ -4,6 +4,7 @@ import com.bw.movie.base.BasePresenter;
 import com.bw.movie.contract.IContract;
 import com.bw.movie.model.ModelImpl;
 
+import java.lang.reflect.Type;
 import java.util.Map;
 
 import static com.bw.movie.api.ApiService.GET;
@@ -23,11 +24,11 @@ public class PresenterImpl extends BasePresenter {
     }
     //请求
     @Override
-    public void startRequest(int method, String url, Class cls, Map<String, Object> map) {
+    public void startRequest(int method, String url, Type type, Map<String, Object> map) {
         switch (method){
             case GET: {
                 //GET请求
-                mModelImpl.getRequest(url, cls, map, new IContract.ModelCallBack() {
+                mModelImpl.getRequest(url, type, map, new IContract.ModelCallBack() {
                     @Override
                     public void onSuccess(Object o) {
                         getView().onSuccess(o);
@@ -40,7 +41,7 @@ public class PresenterImpl extends BasePresenter {
             }break;
             case POST: {
                 //POST请求
-                mModelImpl.postRequest(url, cls, map, new IContract.ModelCallBack() {
+                mModelImpl.postRequest(url, type, map, new IContract.ModelCallBack() {
                     @Override
                     public void onSuccess(Object o) {
                         getView().onSuccess(o);

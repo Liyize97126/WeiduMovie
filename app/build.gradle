@@ -39,4 +39,19 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
     //okhttp拦截器
     implementation 'com.squareup.okhttp3:logging-interceptor:4.4.0'
+    //Tablalyout
+    implementation 'com.android.support:design:29.0.0'
+    //RecylerView
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    //第三方框架：TwinklingRefreshLayout
+    implementation 'com.lcodecorex:tkrefreshlayout:1.0.7'
+    //XBanner
+    implementation 'com.github.xiaohaibin:XBanner:androidx_v1.0.2'
+    //Fresco
+    implementation 'com.facebook.fresco:fresco:0.14.1'
+    //支持 GIF 动图
+    implementation 'com.facebook.fresco:animated-gif:0.14.1'
+    //支持 WebP（静态图+动图）
+    implementation 'com.facebook.fresco:animated-webp:0.14.1'
+    implementation 'com.facebook.fresco:webpsupport:0.14.1'
 }

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  第三方刷新框架   -->
+<com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/twinkling_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_gravity="center_horizontal">
+
+                <!-- XBanner -->
+                <com.stx.xhb.androidx.XBanner
+                    android:id="@+id/x_ban"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1/1"
+                    android:textSize="22sp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#1E2444"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/zzry_ding"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/zzry"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="正在热映"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/zzry_ding"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="更多"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"/>
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/zzry_recy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#1E2444"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/jjsy_ding"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/jjsy"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="即将上映"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/jjsy_ding"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="更多"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"/>
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/jjsy_recy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#1E2444"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/rndy_ding"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/rndy"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="热门电影"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/rndy_ding"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="更多"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:background="#BEBEBE">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    app:failureImage="@drawable/movie_zhan"
+                    app:failureImageScaleType="center"
+                    app:placeholderImage="@drawable/movie_zhan"
+                    app:placeholderImageScaleType="center"/>
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rndy_recy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>

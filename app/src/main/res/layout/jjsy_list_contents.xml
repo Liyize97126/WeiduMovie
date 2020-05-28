@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <RelativeLayout
+        android:layout_width="160dp"
+        android:layout_height="210dp"
+        android:background="#BEBEBE"
+        android:id="@+id/ding0">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/image_url"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:failureImage="@drawable/movie_zhan"
+            app:failureImageScaleType="center"
+            app:placeholderImage="@drawable/movie_zhan"
+            app:placeholderImageScaleType="center"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignBottom="@id/ding0"
+        android:layout_toRightOf="@id/ding0"
+        android:layout_alignTop="@id/ding0"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="15dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2580"
+            android:textSize="22sp"
+            android:textColor="@color/textWriteColor"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/release_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2580"
+            android:textSize="22sp"
+            android:textColor="@color/textWriteColor"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/want_see_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2580"
+            android:textSize="22sp"
+            android:textColor="@color/textWriteColor"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
