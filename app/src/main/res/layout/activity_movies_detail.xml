@@ -23,12 +23,42 @@
             app:placeholderImage="@drawable/movie_zhan"
             app:placeholderImageScaleType="center"/>
 
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            android:layout_margin="@dimen/dp_25"/>
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="评分   9.9分"
+            android:textSize="@dimen/sp_16"
+            android:textColor="@color/colorTextWrite"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_45"/>
+
+        <TextView
+            android:id="@+id/comment_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="评论   12.0万条"
+            android:textSize="@dimen/sp_16"
+            android:textColor="@color/colorTextWrite"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_45"/>
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
-        android:layout_weight="2"
+        android:layout_weight="2.2"
         android:background="#161B33">
 
         <LinearLayout
@@ -36,8 +66,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/dp_15"
-            android:layout_marginRight="@dimen/dp_25">
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_20">
 
             <ImageView
                 android:id="@+id/whether_follow_pic"
@@ -53,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:text="关注状态"
                 android:textColor="@color/colorTextWrite"
-                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_10"
                 android:layout_marginBottom="@dimen/dp_5"
                 android:layout_gravity="center_horizontal"/>
 
@@ -63,19 +93,19 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2580"
+            android:text="电影名称"
             android:textColor="@color/colorTextWrite"
-            android:textSize="@dimen/sp_20"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_15"/>
+            android:textSize="@dimen/sp_22"
+            android:layout_marginLeft="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_20"/>
 
         <LinearLayout
             android:id="@+id/ding1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_15"
             android:layout_below="@id/name">
 
             <TextView
@@ -83,15 +113,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorTextWrite"
-                android:textSize="@dimen/sp_20"/>
+                android:textSize="@dimen/sp_16"/>
 
             <TextView
                 android:id="@+id/duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2580"
+                android:text="123分钟"
                 android:textColor="@color/colorTextWrite"
-                android:textSize="@dimen/sp_20"
+                android:textSize="@dimen/sp_16"
                 android:layout_marginLeft="@dimen/dp_15"/>
 
         </LinearLayout>
@@ -101,25 +131,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_25"
+            android:layout_marginTop="@dimen/dp_15"
             android:layout_below="@id/ding1">
 
             <TextView
                 android:id="@+id/release_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2580"
+                android:text="2000-01-01"
                 android:textColor="@color/colorTextWrite"
-                android:textSize="@dimen/sp_20"/>
+                android:textSize="@dimen/sp_16"/>
 
             <TextView
                 android:id="@+id/place_origin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2580"
+                android:text="中国大陆上映"
                 android:textColor="@color/colorTextWrite"
-                android:textSize="@dimen/sp_20"
+                android:textSize="@dimen/sp_16"
                 android:layout_marginLeft="@dimen/dp_15"/>
 
         </LinearLayout>
@@ -129,25 +159,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_0"
-        android:layout_weight="1">
+        android:layout_weight="0.8">
 
         <Button
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="4.5"
             android:background="@drawable/detail_button_first"
             android:text="写影评"
             android:textColor="@color/colorTextWrite"
-            android:textSize="@dimen/sp_20"/>
+            android:textSize="@dimen/sp_18"/>
 
         <Button
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
-            android:layout_weight="6"
+            android:layout_weight="5.5"
             android:background="@drawable/detail_button_second"
             android:text="选座购票"
             android:textColor="@color/colorTextWrite"
-            android:textSize="@dimen/sp_20"/>
+            android:textSize="@dimen/sp_18"/>
 
     </LinearLayout>
 

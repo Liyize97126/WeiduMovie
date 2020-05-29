@@ -1,11 +1,16 @@
 package com.bw.movie.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.activity.MoviesDetailActivity;
 import com.bw.movie.adapter.ComingSoonMovieListAdapter;
@@ -13,15 +18,22 @@ import com.bw.movie.adapter.HotMovieListAdapter;
 import com.bw.movie.adapter.ReleaseMovieListAdapter;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
+import com.bw.movie.bean.BannerData;
 import com.bw.movie.bean.ComingSoonMovieList;
 import com.bw.movie.bean.DataListBean;
 import com.bw.movie.bean.HotMovieList;
 import com.bw.movie.bean.ReleaseMovieList;
 import com.bw.movie.presenter.PresenterImpl;
 import com.bw.movie.url.MyUrl;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.AbstractDraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.stx.xhb.androidx.XBanner;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -38,13 +50,17 @@ import static com.bw.movie.api.ApiService.GET;
 public class MovieListFragment extends BaseFragment {
     //定义
     private TwinklingRefreshLayout twinklingRl;
-    private boolean listData1,listData2,listData3;
+    private XBanner xBan;
+    private TextView xBanNum,name,score;
+    private SimpleDraweeView horizontalImage;
     private RecyclerView mZZRYRecy,mJJSYRecy,mRNDYRecy;
+    private boolean listData1,listData2,listData3;
     private ReleaseMovieListAdapter releaseMovieListAdapter;
     private ComingSoonMovieListAdapter comingSoonMovieListAdapter;
     private HotMovieListAdapter hotMovieListAdapter;
     private Map<String, Object> releaseMovieMap,comingSoonMovieMap,hotMovieMap;
-    private Type releaseMovieType,comingSoonMovieType,hotMovieType;
+    private Type releaseMovieType,comingSoonMovieType,hotMovieType,bannerType;
+    private int bannerNumber;
     //方法实现
     //布局
     @Override
@@ -55,6 +71,11 @@ public class MovieListFragment extends BaseFragment {
     @Override
     protected void initViews(View mContentView) {
         //获取ID
+        xBan = mContentView.findViewById(R.id.x_ban);
+        xBanNum = mContentView.findViewById(R.id.x_ban_num);
+        name = mContentView.findViewById(R.id.name);
+        score = mContentView.findViewById(R.id.score);
+        horizontalImage = mContentView.findViewById(R.id.horizontal_image);
         twinklingRl = mContentView.findViewById(R.id.twinkling_rl);
         mZZRYRecy = mContentView.findViewById(R.id.zzry_recy);
         mJJSYRecy = mContentView.findViewById(R.id.jjsy_recy);
@@ -65,6 +86,8 @@ public class MovieListFragment extends BaseFragment {
         comingSoonMovieType = new TypeToken<DataListBean<ComingSoonMovieList>>() {
         }.getType();
         hotMovieType = new TypeToken<DataListBean<HotMovieList>>() {
+        }.getType();
+        bannerType = new TypeToken<DataListBean<BannerData>>() {
         }.getType();
         //设置加载参数
         releaseMovieMap = new HashMap<>();
@@ -92,6 +115,7 @@ public class MovieListFragment extends BaseFragment {
                 mPresenter.startRequest(GET, MyUrl.FIND_RELEASE_MOVIE_LIST, releaseMovieType ,releaseMovieMap);
                 mPresenter.startRequest(GET,MyUrl.FIND_COMING_SOON_MOVIE_LIST, comingSoonMovieType, comingSoonMovieMap);
                 mPresenter.startRequest(GET,MyUrl.FIND_HOT_MOVIE_LIST,hotMovieType,hotMovieMap);
+                mPresenter.startRequest(GET,MyUrl.BANNER,bannerType,null);
             }
         });
         //设置布局管理器
@@ -127,6 +151,20 @@ public class MovieListFragment extends BaseFragment {
                 jumpMovieDetailActivity((int) movieId);
             }
         });
+        //设置Banner页面变化监听
+        xBan.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+            @Override
+            public void onPageSelected(int position) {
+                //设置数据
+                xBanNum.setText((position + 1) + "/" + bannerNumber);
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
     //初始化Presenter
     @Override
@@ -149,7 +187,7 @@ public class MovieListFragment extends BaseFragment {
         //instanceof判断
         if(o instanceof DataListBean){
             //获取集合
-            List result = ((DataListBean) o).getResult();
+            final List result = ((DataListBean) o).getResult();
             //判断是否非空
             if(result.size() > 0){
                 //instanceof判断
@@ -178,13 +216,41 @@ public class MovieListFragment extends BaseFragment {
                     if(hotMovieListAdapter != null){
                         hotMovieListAdapter.getList().clear();
                     }
+                    //设置数据
+                    name.setText(((HotMovieList) result.get(0)).getName());
+                    score.setText(((HotMovieList) result.get(0)).getScore() + "分");
+                    //设置图片
+                    ImageRequest build = ImageRequestBuilder.newBuilderWithSource(Uri.parse(((HotMovieList) result.get(0)).getHorizontalImage()))
+                            .setProgressiveRenderingEnabled(true).build();
+                    AbstractDraweeController controller = Fresco.newDraweeControllerBuilder()
+                            .setImageRequest(build)
+                            .build();
+                    horizontalImage.setController(controller);
+                    //删除第一条数据
+                    result.remove(0);
                     //添加数据到集合
                     hotMovieListAdapter.getList().addAll(result);
                     hotMovieListAdapter.notifyDataSetChanged();
                     listData3 = true;
                 }
+                if(result.get(0) instanceof BannerData){
+                    //设置Banner总数
+                    bannerNumber = result.size();
+                    //设置XBanner
+                    xBan.setBannerData(result);
+                    //开始加载图片
+                    xBan.loadImage(new XBanner.XBannerAdapter() {
+                        @Override
+                        public void loadBanner(XBanner banner, Object model, View view, int position) {
+                            //展示图片
+                            Glide.with(view.getContext())
+                                    .load(((BannerData) result.get(position)).getImageUrl())
+                                    .into((ImageView) view);
+                        }
+                    });
+                }
                 //判断是否刷新完成
-                if(listData1 && listData2 && listData3){
+                if(listData1 || listData2 || listData3){
                     //提示刷新完成
                     twinklingRl.finishRefreshing();
                 }

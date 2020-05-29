@@ -17,12 +17,12 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_lay"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/dp_60"
         android:layout_alignParentBottom="true"
         app:tabTextColor="#FFFFFF"
-        app:tabMaxWidth="0dp"
+        app:tabMaxWidth="@dimen/dp_0"
         app:tabGravity="fill"
-        app:tabIndicatorHeight="0dp"
+        app:tabIndicatorHeight="@dimen/dp_0"
         android:background="#1E2444"
         app:tabRippleColor = "@android:color/transparent"/>
 

@@ -1,6 +1,7 @@
 package com.bw.movie.activity;
 
 import android.net.Uri;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,6 +13,8 @@ import com.bw.movie.bean.DataBean;
 import com.bw.movie.bean.MoviesDetail;
 import com.bw.movie.presenter.PresenterImpl;
 import com.bw.movie.url.MyUrl;
+import com.bw.movie.util.NetUtil;
+import com.bw.movie.util.TimesFormatUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -35,8 +38,8 @@ public class MoviesDetailActivity extends BaseActivity {
     private Map<String, Object> map;
     private Type type;
     private SimpleDraweeView imageUrl;
-    private ImageView whetherFollowPic;
-    private TextView whetherFollowText,name,movieType,duration,releaseTime,placeOrigin;
+    private ImageView back,whetherFollowPic;
+    private TextView score,commentNum,whetherFollowText,name,movieType,duration,releaseTime,placeOrigin;
     //方法实现
     @Override
     protected boolean isFullScreen() {
@@ -54,7 +57,10 @@ public class MoviesDetailActivity extends BaseActivity {
     protected void initView() {
         //获取ID
         imageUrl = findViewById(R.id.image_url);
+        back = findViewById(R.id.back);
         whetherFollowPic = findViewById(R.id.whether_follow_pic);
+        score = findViewById(R.id.score);
+        commentNum = findViewById(R.id.comment_num);
         whetherFollowText = findViewById(R.id.whether_follow_text);
         name = findViewById(R.id.name);
         movieType = findViewById(R.id.movie_type);
@@ -69,11 +75,22 @@ public class MoviesDetailActivity extends BaseActivity {
         //设置加载参数
         map = new HashMap<>();
         map.put("movieId", movieId);
+        //返回界面操作
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     @Override
     protected void startCoding() {
-        //发送请求
-        mPresenter.startRequest(GET, MyUrl.FIND_MOVIES_DETAIL,type,map);
+        //判断网络
+        if(NetUtil.getInstance().isConnected()){
+            //发送请求
+            mPresenter.startRequest(GET, MyUrl.FIND_MOVIES_DETAIL,type,map);
+        } else {
+        }
     }
     @Override
     protected void initResume() {
@@ -94,6 +111,8 @@ public class MoviesDetailActivity extends BaseActivity {
                 //instanceof判断
                 if(result instanceof MoviesDetail){
                     //设置数据
+                    score.setText("评分   " + ((MoviesDetail) result).getScore() + "分");
+                    commentNum.setText("评论   " + ((MoviesDetail) result).getCommentNum() + "条");
                     name.setText(((MoviesDetail) result).getName());
                     if(((MoviesDetail) result).getMovieType().equals("")){
                         //去除外边距
@@ -104,7 +123,7 @@ public class MoviesDetailActivity extends BaseActivity {
                         movieType.setText(((MoviesDetail) result).getMovieType());
                     }
                     duration.setText(((MoviesDetail) result).getDuration());
-                    releaseTime.setText( + ((MoviesDetail) result).getReleaseTime() + "ms");
+                    releaseTime.setText(TimesFormatUtil.timeFormatFirst(((MoviesDetail) result).getReleaseTime()));
                     placeOrigin.setText(((MoviesDetail) result).getPlaceOrigin() + "上映");
                     //设置图片
                     ImageRequest build = ImageRequestBuilder.newBuilderWithSource(Uri.parse(((MoviesDetail) result).getImageUrl()))

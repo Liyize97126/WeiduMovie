@@ -9,7 +9,7 @@
     <!-- 首页选项卡选中文本颜色 -->
     <color name="colorHomePageTabTextSelected">#E81A5F</color>
     <!-- 占位图错误图阴影颜色 -->
-    <color name="colorZhanBackground">#BEBEBE</color>
+    <color name="colorZhanBackground">#D1D1D1</color>
     <!-- 文本颜色白 -->
     <color name="colorTextWrite">#FFFFFF</color>
 </resources>

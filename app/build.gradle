@@ -54,4 +54,6 @@ dependencies {
     //支持 WebP（静态图+动图）
     implementation 'com.facebook.fresco:animated-webp:0.14.1'
     implementation 'com.facebook.fresco:webpsupport:0.14.1'
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
 }
