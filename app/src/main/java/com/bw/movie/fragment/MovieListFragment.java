@@ -1,18 +1,20 @@
 package com.bw.movie.fragment;
 
+import android.content.Intent;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bw.movie.R;
+import com.bw.movie.activity.MoviesDetailActivity;
 import com.bw.movie.adapter.ComingSoonMovieListAdapter;
 import com.bw.movie.adapter.HotMovieListAdapter;
 import com.bw.movie.adapter.ReleaseMovieListAdapter;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.ComingSoonMovieList;
-import com.bw.movie.bean.DataBean;
+import com.bw.movie.bean.DataListBean;
 import com.bw.movie.bean.HotMovieList;
 import com.bw.movie.bean.ReleaseMovieList;
 import com.bw.movie.presenter.PresenterImpl;
@@ -58,11 +60,11 @@ public class MovieListFragment extends BaseFragment {
         mJJSYRecy = mContentView.findViewById(R.id.jjsy_recy);
         mRNDYRecy = mContentView.findViewById(R.id.rndy_recy);
         //泛型类处理
-        releaseMovieType = new TypeToken<DataBean<ReleaseMovieList>>() {
+        releaseMovieType = new TypeToken<DataListBean<ReleaseMovieList>>() {
         }.getType();
-        comingSoonMovieType = new TypeToken<DataBean<ComingSoonMovieList>>() {
+        comingSoonMovieType = new TypeToken<DataListBean<ComingSoonMovieList>>() {
         }.getType();
-        hotMovieType = new TypeToken<DataBean<HotMovieList>>() {
+        hotMovieType = new TypeToken<DataListBean<HotMovieList>>() {
         }.getType();
         //设置加载参数
         releaseMovieMap = new HashMap<>();
@@ -103,6 +105,28 @@ public class MovieListFragment extends BaseFragment {
         mZZRYRecy.setAdapter(releaseMovieListAdapter);
         mJJSYRecy.setAdapter(comingSoonMovieListAdapter);
         mRNDYRecy.setAdapter(hotMovieListAdapter);
+        //设置回调监听
+        releaseMovieListAdapter.setDataCallBack(new ReleaseMovieListAdapter.DataCallBack() {
+            @Override
+            public void jumpMovieDetail(long movieId) {
+                //调用跳转方法
+                jumpMovieDetailActivity((int) movieId);
+            }
+        });
+        comingSoonMovieListAdapter.setDataCallBack(new ComingSoonMovieListAdapter.DataCallBack() {
+            @Override
+            public void jumpMovieDetail(long movieId) {
+                //调用跳转方法
+                jumpMovieDetailActivity((int) movieId);
+            }
+        });
+        hotMovieListAdapter.setDataCallBack(new HotMovieListAdapter.DataCallBack() {
+            @Override
+            public void jumpMovieDetail(long movieId) {
+                //调用跳转方法
+                jumpMovieDetailActivity((int) movieId);
+            }
+        });
     }
     //初始化Presenter
     @Override
@@ -123,9 +147,9 @@ public class MovieListFragment extends BaseFragment {
     @Override
     public void onSuccess(Object o) {
         //instanceof判断
-        if(o instanceof DataBean){
+        if(o instanceof DataListBean){
             //获取集合
-            List result = ((DataBean) o).getResult();
+            List result = ((DataListBean) o).getResult();
             //判断是否非空
             if(result.size() > 0){
                 //instanceof判断
@@ -170,5 +194,14 @@ public class MovieListFragment extends BaseFragment {
     //失败回调
     @Override
     public void onFail(String err) {
+    }
+    //封装统一跳转电影详情的方法
+    private void jumpMovieDetailActivity(int movieId){
+        //跳转
+        Intent intent = new Intent(getActivity(), MoviesDetailActivity.class);
+        //传值
+        intent.putExtra("movieId", movieId);
+        //完成跳转
+        startActivity(intent);
     }
 }

@@ -28,9 +28,13 @@ import java.util.List;
 public class ReleaseMovieListAdapter extends RecyclerView.Adapter<ReleaseMovieListAdapter.MyHolder> {
     //定义
     private List<ReleaseMovieList> list = new ArrayList<>();
+    private DataCallBack dataCallBack;
     //封装
     public List<ReleaseMovieList> getList() {
         return list;
+    }
+    public void setDataCallBack(DataCallBack dataCallBack) {
+        this.dataCallBack = dataCallBack;
     }
     //方法实现
     //初始化视图
@@ -55,6 +59,19 @@ public class ReleaseMovieListAdapter extends RecyclerView.Adapter<ReleaseMovieLi
         //设置文本
         holder.name.setText(releaseMovieList.getName());
         holder.score.setText(releaseMovieList.getScore() + "分");
+        //点击监听
+        holder.itemView.setTag(releaseMovieList.getMovieId());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long movieId = (long) v.getTag();
+                //判断
+                if(dataCallBack != null){
+                    //完成回调
+                    dataCallBack.jumpMovieDetail(movieId);
+                }
+            }
+        });
     }
     //条目总数
     @Override
@@ -73,5 +90,9 @@ public class ReleaseMovieListAdapter extends RecyclerView.Adapter<ReleaseMovieLi
             score = itemView.findViewById(R.id.score);
             name = itemView.findViewById(R.id.name);
         }
+    }
+    //声明回调
+    public interface DataCallBack {
+        void jumpMovieDetail(long movieId);
     }
 }

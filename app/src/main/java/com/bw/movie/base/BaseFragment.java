@@ -58,8 +58,10 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
             initViews(mContentView);
             //初始化Presenter
             if(mPresenter == null){
-                mPresenter = initPresenter();
-                mPresenter.onAttach(this);
+                if(initPresenter() != null){
+                    mPresenter = initPresenter();
+                    mPresenter.onAttach(this);
+                }
             }
         }
         isViewLoad = true;

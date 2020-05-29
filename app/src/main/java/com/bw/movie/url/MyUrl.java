@@ -46,4 +46,6 @@ public interface MyUrl {
     String FIND_RELEASE_MOVIE_LIST ="movieApi/movie/v2/findReleaseMovieList";
     //查询即将上映电影列表
     String FIND_COMING_SOON_MOVIE_LIST = "movieApi/movie/v2/findComingSoonMovieList";
+    //查询电影详情
+    String FIND_MOVIES_DETAIL = "movieApi/movie/v2/findMoviesDetail";
 }

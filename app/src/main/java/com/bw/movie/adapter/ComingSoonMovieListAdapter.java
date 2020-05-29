@@ -28,9 +28,13 @@ import java.util.List;
 public class ComingSoonMovieListAdapter extends RecyclerView.Adapter<ComingSoonMovieListAdapter.MyHolder> {
     //定义
     private List<ComingSoonMovieList> list = new ArrayList<>();
+    private DataCallBack dataCallBack;
     //封装
     public List<ComingSoonMovieList> getList() {
         return list;
+    }
+    public void setDataCallBack(DataCallBack dataCallBack) {
+        this.dataCallBack = dataCallBack;
     }
     //方法实现
     //初始化视图
@@ -56,6 +60,19 @@ public class ComingSoonMovieListAdapter extends RecyclerView.Adapter<ComingSoonM
         holder.name.setText(comingSoonMovieList.getName());
         holder.releaseTime.setText("" + comingSoonMovieList.getReleaseTime());
         holder.wantSeeNum.setText("" + comingSoonMovieList.getWantSeeNum());
+        //点击监听
+        holder.itemView.setTag(comingSoonMovieList.getMovieId());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long movieId = (long) v.getTag();
+                //判断
+                if(dataCallBack != null){
+                    //完成回调
+                    dataCallBack.jumpMovieDetail(movieId);
+                }
+            }
+        });
     }
     //条目总数
     @Override
@@ -75,5 +92,9 @@ public class ComingSoonMovieListAdapter extends RecyclerView.Adapter<ComingSoonM
             releaseTime = itemView.findViewById(R.id.release_time);
             wantSeeNum = itemView.findViewById(R.id.want_see_num);
         }
+    }
+    //声明回调
+    public interface DataCallBack {
+        void jumpMovieDetail(long movieId);
     }
 }

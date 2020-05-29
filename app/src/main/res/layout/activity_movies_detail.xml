@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.MoviesDetailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="7"
+        android:background="@color/colorZhanBackground">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/image_url"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:failureImage="@drawable/movie_zhan"
+            app:failureImageScaleType="center"
+            app:placeholderImage="@drawable/movie_zhan"
+            app:placeholderImageScaleType="center"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="2"
+        android:background="#161B33">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_25">
+
+            <ImageView
+                android:id="@+id/whether_follow_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/empty_heart_selected"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_5"/>
+
+            <TextView
+                android:id="@+id/whether_follow_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关注状态"
+                android:textColor="@color/colorTextWrite"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2580"
+            android:textColor="@color/colorTextWrite"
+            android:textSize="@dimen/sp_20"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_15"/>
+
+        <LinearLayout
+            android:id="@+id/ding1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_below="@id/name">
+
+            <TextView
+                android:id="@+id/movie_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorTextWrite"
+                android:textSize="@dimen/sp_20"/>
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2580"
+                android:textColor="@color/colorTextWrite"
+                android:textSize="@dimen/sp_20"
+                android:layout_marginLeft="@dimen/dp_15"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ding2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_below="@id/ding1">
+
+            <TextView
+                android:id="@+id/release_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2580"
+                android:textColor="@color/colorTextWrite"
+                android:textSize="@dimen/sp_20"/>
+
+            <TextView
+                android:id="@+id/place_origin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2580"
+                android:textColor="@color/colorTextWrite"
+                android:textSize="@dimen/sp_20"
+                android:layout_marginLeft="@dimen/dp_15"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:layout_weight="1">
+
+        <Button
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:background="@drawable/detail_button_first"
+            android:text="写影评"
+            android:textColor="@color/colorTextWrite"
+            android:textSize="@dimen/sp_20"/>
+
+        <Button
+            android:layout_width="@dimen/dp_0"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:background="@drawable/detail_button_second"
+            android:text="选座购票"
+            android:textColor="@color/colorTextWrite"
+            android:textSize="@dimen/sp_20"/>
+
+    </LinearLayout>
+
+</LinearLayout>

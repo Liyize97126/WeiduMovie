@@ -36,9 +36,11 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
             //数据请求
             initData();
             //初始化Presenter
-            if(mPresenter != null){
-                mPresenter = initPresenter();
-                mPresenter.onAttach(this);
+            if(mPresenter == null){
+                if(initPresenter() != null){
+                    mPresenter = initPresenter();
+                    mPresenter.onAttach(this);
+                }
             }
             //其它代码
             startCoding();

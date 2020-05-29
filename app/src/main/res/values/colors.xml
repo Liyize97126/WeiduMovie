@@ -8,6 +8,8 @@
     <color name="colorHomePageFrameLayout">#161B33</color>
     <!-- 首页选项卡选中文本颜色 -->
     <color name="colorHomePageTabTextSelected">#E81A5F</color>
+    <!-- 占位图错误图阴影颜色 -->
+    <color name="colorZhanBackground">#BEBEBE</color>
     <!-- 文本颜色白 -->
-    <color name="textWriteColor">#FFFFFF</color>
+    <color name="colorTextWrite">#FFFFFF</color>
 </resources>

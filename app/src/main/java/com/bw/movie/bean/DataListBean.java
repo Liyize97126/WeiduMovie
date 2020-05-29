@@ -1,18 +1,20 @@
 package com.bw.movie.bean;
 
+import java.util.List;
+
 /**
- * 处理单个对象的根数据Bean类
+ * 根数据Bean类
  * 李易泽
- * 20200528
+ * 20200525
  */
-public class DataBean<T> {
-    private T result;
+public class DataListBean<T> {
+    private List<T> result;
     private String message;
     private String status;
-    public T getResult() {
+    public List<T> getResult() {
         return result;
     }
-    public void setResult(T result) {
+    public void setResult(List<T> result) {
         this.result = result;
     }
     public String getMessage() {
