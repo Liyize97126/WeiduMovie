@@ -15,6 +15,7 @@ import com.bw.movie.base.BaseActivity;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.fragment.MovieListFragment;
+import com.bw.movie.fragment.MyFragment;
 import com.bw.movie.presenter.PresenterImpl;
 import com.google.android.material.tabs.TabLayout;
 
@@ -55,7 +56,7 @@ public class HomeActivity extends BaseActivity {
         fragments = new ArrayList<>();
         fragments.add(new MovieListFragment());
         fragments.add(new MovieListFragment());
-        fragments.add(new MovieListFragment());
+        fragments.add(new MyFragment());
         //设置适配器
         viewPag.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @NonNull
