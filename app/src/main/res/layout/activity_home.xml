@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorActivityBackground"
     tools:context=".activity.HomeActivity">
     <!--  ViewPager  -->
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorHomePageFrameLayout"
         android:layout_above="@id/tab_lay"/>
     <!--  TabLayout  -->
     <!--  app:tabRippleColor = "@android:color/transparent":去除TabLayout阴影效果  -->

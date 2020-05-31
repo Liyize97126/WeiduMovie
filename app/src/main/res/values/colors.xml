@@ -4,8 +4,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#161B33</color>
     <color name="colorAccent">#D81B60</color>
-    <!-- 首页FrameLayout背景颜色 -->
-    <color name="colorHomePageFrameLayout">#161B33</color>
+    <!-- Activity背景颜色 -->
+    <color name="colorActivityBackground">#161B33</color>
+    <!-- 首页Tab页背景颜色 -->
+    <color name="colorHomePageFragment">#161B33</color>
     <!-- 首页选项卡选中文本颜色 -->
     <color name="colorHomePageTabTextSelected">#E81A5F</color>
     <!-- 占位图错误图阴影颜色 -->

@@ -8,9 +8,6 @@ import android.widget.TextView;
 import com.bw.movie.R;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
-import com.bw.movie.bean.MyMenuListBean;
-
-import java.util.List;
 
 /**
  * 首页我的页面
@@ -22,7 +19,6 @@ public class MyFragment extends BaseFragment {
     private ImageView allSysMsgDo,headPic;
     private TextView nickName;
     private RelativeLayout loginRegisterDo,myMovieTicketDo;
-    private List<MyMenuListBean> menuData;
     //方法实现
     @Override
     protected int getFragmentLayoutId() {
