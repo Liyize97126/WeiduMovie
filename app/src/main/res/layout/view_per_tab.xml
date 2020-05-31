@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/z_tab_background"
     android:orientation="horizontal"
-    android:padding="20dp">
+    android:padding="@dimen/dp_10">
 
     <ImageView
         android:id="@+id/z_tab_image"
@@ -17,7 +17,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="@dimen/dp_25"
+        android:textSize="@dimen/sp_16"
         android:textColor="@color/colorHomePageTabTextSelected"/>
 
 </LinearLayout>

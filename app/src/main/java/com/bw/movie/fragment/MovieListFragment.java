@@ -98,7 +98,7 @@ public class MovieListFragment extends BaseFragment {
         comingSoonMovieMap.put("count",3);
         hotMovieMap = new HashMap<>();
         hotMovieMap.put("page",1);
-        hotMovieMap.put("count",4);
+        hotMovieMap.put("count",6);
         //TwinklingRefreshLayout设置
         //禁用下拉加载
         twinklingRl.setEnableLoadmore(false);

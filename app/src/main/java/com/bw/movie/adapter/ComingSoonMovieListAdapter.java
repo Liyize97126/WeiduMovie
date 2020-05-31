@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bw.movie.R;
 import com.bw.movie.bean.ComingSoonMovieList;
+import com.bw.movie.util.TimesFormatUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -58,8 +59,8 @@ public class ComingSoonMovieListAdapter extends RecyclerView.Adapter<ComingSoonM
         holder.imageUrl.setController(controller);
         //设置文本
         holder.name.setText(comingSoonMovieList.getName());
-        holder.releaseTime.setText("" + comingSoonMovieList.getReleaseTime());
-        holder.wantSeeNum.setText("" + comingSoonMovieList.getWantSeeNum());
+        holder.releaseTime.setText(TimesFormatUtil.timeFormatSecond(comingSoonMovieList.getReleaseTime()));
+        holder.wantSeeNum.setText(comingSoonMovieList.getWantSeeNum() + "人想看");
         //点击监听
         holder.itemView.setTag(comingSoonMovieList.getMovieId());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
