@@ -48,7 +48,12 @@ public interface MyUrl {
     String FIND_COMING_SOON_MOVIE_LIST = "movieApi/movie/v2/findComingSoonMovieList";
     //查询电影详情
     String FIND_MOVIES_DETAIL = "movieApi/movie/v2/findMoviesDetail";
-    //3-5~3-21
+    //3-5~3-10
+    //关注电影
+    String FOLLOW_MOVIE = "movieApi/movie/v1/verify/followMovie";
+    //取消关注电影
+    String CANCEL_FOLLOW_MOVIE = "movieApi/movie/v1/verify/cancelFollowMovie";
+    //3-13~3-21
     //查询推荐影院信息
     String FIND_RECOMMEND_CINEMAS = "movieApi/cinema/v1/findRecommendCinemas";
     //查询附近影院
