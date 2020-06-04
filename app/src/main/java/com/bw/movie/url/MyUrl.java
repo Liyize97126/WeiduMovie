@@ -53,7 +53,14 @@ public interface MyUrl {
     String FIND_RECOMMEND_CINEMAS = "movieApi/cinema/v1/findRecommendCinemas";
     //查询附近影院
     String FIND_NEAR_BY_CINEMAS = "movieApi/cinema/v1/findNearbyCinemas";
+    //4-10
+    //根据区域查询影院
+    String FIND_CINEMA_BY_REGION = "movieApi/cinema/v2/findCinemaByRegion";
     //5-8
     //查询banner
     String BANNER = "movieApi/tool/v2/banner";
+    //查询区域列表
+    String FIND_REGION_LIST = "movieApi/tool/v2/findRegionList";
+    //查询一周排期的时间
+    String FIND_DATE_LIST = "movieApi/tool/v2/findDateList";
 }

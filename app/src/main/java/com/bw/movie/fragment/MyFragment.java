@@ -1,11 +1,13 @@
 package com.bw.movie.fragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bw.movie.R;
+import com.bw.movie.activity.LoginActivity;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 
@@ -32,6 +34,15 @@ public class MyFragment extends BaseFragment {
         nickName = mContentView.findViewById(R.id.nick_name);
         loginRegisterDo = mContentView.findViewById(R.id.login_register_do);
         myMovieTicketDo = mContentView.findViewById(R.id.my_movie_ticket_do);
+        //点击事件
+        loginRegisterDo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     protected BasePresenter initPresenter() {

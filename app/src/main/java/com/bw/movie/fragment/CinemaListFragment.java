@@ -14,6 +14,8 @@ import com.bw.movie.R;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.CinemaTabBean;
+import com.bw.movie.fragment.cinemafragment.CinemaByRegionFragment;
+import com.bw.movie.fragment.cinemafragment.NearbyCinemaFragment;
 import com.bw.movie.fragment.cinemafragment.RecommendCinemaFragment;
 import com.google.android.material.tabs.TabLayout;
 
@@ -54,8 +56,8 @@ public class CinemaListFragment extends BaseFragment {
     protected void lazyLoad() {
         //加载Tab页
         list.add(new CinemaTabBean("推荐影院",new RecommendCinemaFragment()));
-        list.add(new CinemaTabBean("附近影院",new RecommendCinemaFragment()));
-        list.add(new CinemaTabBean("海淀区 ▼",new RecommendCinemaFragment()));
+        list.add(new CinemaTabBean("附近影院",new NearbyCinemaFragment()));
+        list.add(new CinemaTabBean("海淀区 ▼",new CinemaByRegionFragment()));
         //设置适配器
         cinemaViewPag.setAdapter(new FragmentPagerAdapter(getActivity().getSupportFragmentManager()) {
             @Nullable
