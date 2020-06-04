@@ -98,6 +98,9 @@ public class RecommendCinemaFragment extends BaseFragment {
     protected void initDestroyView() {
     }
     @Override
+    protected void initDetach() {
+    }
+    @Override
     public void onSuccess(Object o) {
         if(o instanceof DataListBean){
             List result = ((DataListBean) o).getResult();

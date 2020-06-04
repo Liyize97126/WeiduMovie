@@ -63,6 +63,9 @@ public class NearbyCinemaFragment extends BaseFragment {
     protected void initDestroyView() {
     }
     @Override
+    protected void initDetach() {
+    }
+    @Override
     public void onSuccess(Object o) {
     }
     @Override

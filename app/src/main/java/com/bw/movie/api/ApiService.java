@@ -17,6 +17,8 @@ import retrofit2.http.Url;
  * 20200523
  */
 public interface ApiService {
+    //请求码
+    int REQUEST_CODE = 100;
     //请求的方式
     int GET = 0;
     int POST = 1;

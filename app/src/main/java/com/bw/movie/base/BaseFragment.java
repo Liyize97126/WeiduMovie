@@ -77,6 +77,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void onDetach() {
         super.onDetach();
+        initDetach();
         //判断
         if(mPresenter != null){
             mPresenter.onDeAttach();
@@ -105,4 +106,5 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     protected abstract P initPresenter();
     protected abstract void lazyLoad();
     protected abstract void initDestroyView();
+    protected abstract void initDetach();
 }

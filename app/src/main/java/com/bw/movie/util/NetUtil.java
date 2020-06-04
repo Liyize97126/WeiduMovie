@@ -49,15 +49,15 @@ public class NetUtil {
             @Override
             public Response intercept(@NotNull Chain chain) throws IOException {
                 //登陆的时候就可以把userId和sessionId保存在本地
-                String userId = MyApplication.getSharedPreferences().getString("userId",null);
+                int userId = MyApplication.getSharedPreferences().getInt("userId", 00000);
                 String sessionId = MyApplication.getSharedPreferences().getString("sessionId", null);
                 //判断是否为空
-                if(TextUtils.isEmpty(userId) || TextUtils.isEmpty(sessionId)){
+                if(userId == 00000 || TextUtils.isEmpty(sessionId)){
                     //返回不带请求头的请求
                     return chain.proceed(chain.request());
                 } else {
                     Request request = chain.request().newBuilder()
-                            .addHeader("userId", userId)
+                            .addHeader("userId", String.valueOf(userId))
                             .addHeader("sessionId", sessionId)
                             .build();
                     return chain.proceed(request);

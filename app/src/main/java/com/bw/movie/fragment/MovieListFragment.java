@@ -181,6 +181,9 @@ public class MovieListFragment extends BaseFragment {
     @Override
     protected void initDestroyView() {
     }
+    @Override
+    protected void initDetach() {
+    }
     //成功回调
     @Override
     public void onSuccess(Object o) {

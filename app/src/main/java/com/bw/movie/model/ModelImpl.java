@@ -33,7 +33,7 @@ public class ModelImpl implements IContract.IModel {
     @Override
     public void postRequest(String url, Type type, Map<String, Object> map, final IContract.ModelCallBack modelCallBack) {
         //发起请求
-        NetUtil.getInstance().getRequest(url, type, map, new NetUtil.NetCallBack() {
+        NetUtil.getInstance().postRequest(url, type, map, new NetUtil.NetCallBack() {
             @Override
             public void onSuccess(Object o) {
                 if(modelCallBack != null){

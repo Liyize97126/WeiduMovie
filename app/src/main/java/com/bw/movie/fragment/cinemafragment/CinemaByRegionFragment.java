@@ -91,6 +91,9 @@ public class CinemaByRegionFragment extends BaseFragment {
     protected void initDestroyView() {
     }
     @Override
+    protected void initDetach() {
+    }
+    @Override
     public void onSuccess(Object o) {
         //instanceof判断
         if(o instanceof DataListBean){
