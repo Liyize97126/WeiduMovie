@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -53,6 +54,7 @@ public class MovieListFragment extends BaseFragment {
     private XBanner xBan;
     private TextView xBanNum,name,score;
     private SimpleDraweeView horizontalImage;
+    private RelativeLayout jumpMovieDetail;
     private RecyclerView mZZRYRecy,mJJSYRecy,mRNDYRecy;
     private boolean listData1,listData2,listData3;
     private ReleaseMovieListAdapter releaseMovieListAdapter;
@@ -77,6 +79,7 @@ public class MovieListFragment extends BaseFragment {
         score = mContentView.findViewById(R.id.score);
         horizontalImage = mContentView.findViewById(R.id.horizontal_image);
         twinklingRl = mContentView.findViewById(R.id.twinkling_rl);
+        jumpMovieDetail = mContentView.findViewById(R.id.jump_movie_detail);
         mZZRYRecy = mContentView.findViewById(R.id.zzry_recy);
         mJJSYRecy = mContentView.findViewById(R.id.jjsy_recy);
         mRNDYRecy = mContentView.findViewById(R.id.rndy_recy);
@@ -218,7 +221,14 @@ public class MovieListFragment extends BaseFragment {
                     //清空列表数据
                     if(hotMovieListAdapter != null){
                         hotMovieListAdapter.getList().clear();
+                        jumpMovieDetail.setVisibility(View.GONE);
                     }
+                    //显示大图框架
+                    jumpMovieDetail.setVisibility(View.VISIBLE);
+                    //获取电影ID
+                    int movieId = (int) ((HotMovieList) result.get(0)).getMovieId();
+                    //传值
+                    jumpMovieDetail.setTag(movieId);
                     //设置数据
                     name.setText(((HotMovieList) result.get(0)).getName());
                     score.setText(((HotMovieList) result.get(0)).getScore() + "分");
@@ -229,6 +239,14 @@ public class MovieListFragment extends BaseFragment {
                             .setImageRequest(build)
                             .build();
                     horizontalImage.setController(controller);
+                    //设置点击事件
+                    jumpMovieDetail.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //调用跳转方法
+                            jumpMovieDetailActivity((Integer) v.getTag());
+                        }
+                    });
                     //删除第一条数据
                     result.remove(0);
                     //添加数据到集合
