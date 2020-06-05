@@ -48,12 +48,22 @@ public interface MyUrl {
     String FIND_COMING_SOON_MOVIE_LIST = "movieApi/movie/v2/findComingSoonMovieList";
     //查询电影详情
     String FIND_MOVIES_DETAIL = "movieApi/movie/v2/findMoviesDetail";
-    //3-5~3-10
+    //根据电影的id查询电影评论
+    String FIND_ALL_MOVIE_COMMENT = "movieApi/movie/v2/findAllMovieComment";
+    //3-6~3-10
     //关注电影
     String FOLLOW_MOVIE = "movieApi/movie/v1/verify/followMovie";
     //取消关注电影
     String CANCEL_FOLLOW_MOVIE = "movieApi/movie/v1/verify/cancelFollowMovie";
-    //3-13~3-21
+    //添加用户对影片的评论
+    String MOVIE_COMMENT = "movieApi/movie/v1/verify/movieComment";
+    //3-14~3-18
+    //预约
+    String RESERVE = "movieApi/movie/v2/verify/reserve";
+    //支付
+    String PAY = "movieApi/movie/v2/verify/pay";
+    //根据关键字查询电影信息
+    String FIND_MOVIE_BY_KEYWORD = "movieApi/movie/v2/findMovieByKeyword";
     //查询推荐影院信息
     String FIND_RECOMMEND_CINEMAS = "movieApi/cinema/v1/findRecommendCinemas";
     //查询附近影院

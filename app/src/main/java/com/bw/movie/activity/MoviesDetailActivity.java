@@ -3,16 +3,28 @@ package com.bw.movie.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.bw.movie.R;
 import com.bw.movie.base.BaseActivity;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.DataBean;
 import com.bw.movie.bean.MoviesDetail;
+import com.bw.movie.bean.MoviesDetailTabBean;
+import com.bw.movie.fragment.moviedetailfragment.IntroducedFragment;
+import com.bw.movie.fragment.moviedetailfragment.MovieCommentsFragment;
+import com.bw.movie.fragment.moviedetailfragment.NoticeFragment;
+import com.bw.movie.fragment.moviedetailfragment.StillFragment;
 import com.bw.movie.presenter.PresenterImpl;
 import com.bw.movie.url.MyUrl;
 import com.bw.movie.util.MyApplication;
@@ -23,10 +35,15 @@ import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.google.android.material.tabs.TabLayout;
 import com.google.gson.reflect.TypeToken;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.bw.movie.api.ApiService.GET;
@@ -46,6 +63,11 @@ public class MoviesDetailActivity extends BaseActivity {
     private LinearLayout followMovieDo;
     private ImageView back,whetherFollowPic;
     private TextView score,commentNum,whetherFollowText,name,movieType,duration,releaseTime,placeOrigin;
+    private TabLayout movieDetailTabLay;
+    private ViewPager movieDetailViewPag;
+    private Button addMovieComment, buyMovieTicketDo;
+    private List<MoviesDetailTabBean> moviesDetailTabBeanList;
+    private int movieId;
     //方法实现
     @Override
     protected boolean isFullScreen() {
@@ -74,8 +96,38 @@ public class MoviesDetailActivity extends BaseActivity {
         duration = findViewById(R.id.duration);
         releaseTime = findViewById(R.id.release_time);
         placeOrigin = findViewById(R.id.place_origin);
+        movieDetailTabLay = findViewById(R.id.movie_detail_tab_lay);
+        movieDetailViewPag = findViewById(R.id.movie_detail_view_pag);
+        addMovieComment = findViewById(R.id.add_movie_comment);
+        buyMovieTicketDo = findViewById(R.id.buy_movie_ticket_do);
+        moviesDetailTabBeanList = new ArrayList<>();
+        //添加页面
+        moviesDetailTabBeanList.add(new MoviesDetailTabBean("介绍",new IntroducedFragment()));
+        moviesDetailTabBeanList.add(new MoviesDetailTabBean("预告",new NoticeFragment()));
+        moviesDetailTabBeanList.add(new MoviesDetailTabBean("剧照",new StillFragment()));
+        moviesDetailTabBeanList.add(new MoviesDetailTabBean("影评",new MovieCommentsFragment()));
+        //设置适配器
+        movieDetailViewPag.setOffscreenPageLimit(moviesDetailTabBeanList.size()-1);
+        movieDetailViewPag.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Nullable
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return moviesDetailTabBeanList.get(position).getTabTitle();
+            }
+            @NonNull
+            @Override
+            public Fragment getItem(int position) {
+                return moviesDetailTabBeanList.get(position).getBaseFragment();
+            }
+            @Override
+            public int getCount() {
+                return moviesDetailTabBeanList.size();
+            }
+        });
+        //关联布局
+        movieDetailTabLay.setupWithViewPager(movieDetailViewPag);
         //获取值
-        int movieId = getIntent().getIntExtra("movieId", -1);
+        movieId = getIntent().getIntExtra("movieId", -1);
         //泛型类处理
         type = new TypeToken<DataBean<MoviesDetail>>() {
         }.getType();
@@ -87,6 +139,14 @@ public class MoviesDetailActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        //点击事件
+        buyMovieTicketDo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //提示
+                Toast.makeText(MoviesDetailActivity.this,"正在开发中，敬请期待！",Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -179,6 +239,9 @@ public class MoviesDetailActivity extends BaseActivity {
                                     whetherFollowText.setText("关注");
                                 }break;
                             }
+                            //其它数据发送粘性事件
+                            EventBus.getDefault().postSticky(movieId);
+                            EventBus.getDefault().postSticky(result);
                         }
                     }
                 }break;

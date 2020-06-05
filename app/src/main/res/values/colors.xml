@@ -8,6 +8,8 @@
     <color name="colorActivityBackground">#161B33</color>
     <!-- 首页Tab页背景颜色 -->
     <color name="colorHomePageFragment">#161B33</color>
+    <!-- 电影详情Tab页背景颜色 -->
+    <color name="colorMovieDetailFragment">#161B33</color>
     <!-- 首页选项卡选中文本颜色 -->
     <color name="colorHomePageTabTextSelected">#E81A5F</color>
     <!-- 占位图错误图阴影颜色 -->

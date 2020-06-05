@@ -63,7 +63,7 @@ public class MyFragment extends BaseFragment {
     }
     //接收订阅者消息
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
-    public void postText(UserInfo userInfo){
+    public void postLoginInfo(UserInfo userInfo){
         headPic.setImageURI(Uri.parse(userInfo.getHeadPic()));
         nickName.setText(userInfo.getNickName());
     }
