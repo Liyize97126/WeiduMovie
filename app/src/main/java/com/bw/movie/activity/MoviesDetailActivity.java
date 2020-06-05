@@ -68,6 +68,7 @@ public class MoviesDetailActivity extends BaseActivity {
     private Button addMovieComment, buyMovieTicketDo;
     private List<MoviesDetailTabBean> moviesDetailTabBeanList;
     private int movieId;
+    private String movieName;
     //方法实现
     @Override
     protected boolean isFullScreen() {
@@ -142,6 +143,15 @@ public class MoviesDetailActivity extends BaseActivity {
             }
         });
         //点击事件
+        addMovieComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //跳转至评价页面
+                Intent intent = new Intent(MoviesDetailActivity.this, WriteEvaluationActivity.class);
+                intent.putExtra("movieName",movieName);
+                startActivity(intent);
+            }
+        });
         buyMovieTicketDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -207,7 +217,8 @@ public class MoviesDetailActivity extends BaseActivity {
                             //设置数据
                             score.setText("评分   " + ((MoviesDetail) result).getScore() + "分");
                             commentNum.setText("评论   " + ((MoviesDetail) result).getCommentNum() + "条");
-                            name.setText(((MoviesDetail) result).getName());
+                            movieName = ((MoviesDetail) result).getName();
+                            name.setText(movieName);
                             if(((MoviesDetail) result).getMovieType().equals("")){
                                 //去除外边距
                                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) duration.getLayoutParams();
