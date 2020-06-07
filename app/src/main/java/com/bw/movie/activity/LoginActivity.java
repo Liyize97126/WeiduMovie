@@ -165,6 +165,8 @@ public class LoginActivity extends BaseActivity {
                     SharedPreferences.Editor edit = MyApplication.getSharedPreferences().edit();
                     edit.putInt("userId",((LoginInfo) result).getUserId());
                     edit.putString("sessionId",((LoginInfo) result).getSessionId());
+                    edit.putString("headPic",((LoginInfo) result).getUserInfo().getHeadPic());
+                    edit.putString("nickName",((LoginInfo) result).getUserInfo().getNickName());
                     edit.putBoolean("loginValidity",true);
                     edit.commit();
                     //发送粘性事件

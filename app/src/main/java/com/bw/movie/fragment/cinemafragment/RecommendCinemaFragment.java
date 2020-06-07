@@ -69,6 +69,7 @@ public class RecommendCinemaFragment extends BaseFragment {
                     map.put("page",page);
                     mPresenter.startRequest(GET, MyUrl.FIND_RECOMMEND_CINEMAS,recommendCinemasType,map);
                 } else {
+                    twinklingRl.finishRefreshing();
                 }
             }
             @Override
@@ -81,6 +82,7 @@ public class RecommendCinemaFragment extends BaseFragment {
                     map.put("page",page);
                     mPresenter.startRequest(GET, MyUrl.FIND_RECOMMEND_CINEMAS,recommendCinemasType,map);
                 } else {
+                    twinklingRl.finishLoadmore();
                 }
             }
         });

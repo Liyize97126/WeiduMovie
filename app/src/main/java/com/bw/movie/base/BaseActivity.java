@@ -29,8 +29,8 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         if(getLayoutId() != 0){
             //布局
             setContentView(getLayoutId());
-            //界面优化
-            getSupportActionBar().hide();
+            //界面优化（设置主题后，该句不可用）
+            //getSupportActionBar().hide();
             //初始化控件
             initView();
             //数据请求

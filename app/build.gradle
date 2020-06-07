@@ -60,4 +60,5 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.2.0'
     //视频播放框架：JCVideoPlayerStandard
     implementation 'fm.jiecao:jiecaovideoplayer:4.8.3'
+    implementation project(path: ':xtoastlibrary')
 }

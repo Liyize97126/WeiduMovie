@@ -26,6 +26,7 @@ import com.bw.movie.bean.HotMovieList;
 import com.bw.movie.bean.ReleaseMovieList;
 import com.bw.movie.presenter.PresenterImpl;
 import com.bw.movie.url.MyUrl;
+import com.bw.movie.util.NetUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -110,15 +111,20 @@ public class MovieListFragment extends BaseFragment {
             @Override
             public void onRefresh(TwinklingRefreshLayout refreshLayout) {
                 super.onRefresh(refreshLayout);
-                //更改flag值
-                listData1 = false;
-                listData2 = false;
-                listData3 = false;
-                //发起请求
-                mPresenter.startRequest(GET, MyUrl.FIND_RELEASE_MOVIE_LIST, releaseMovieType ,releaseMovieMap);
-                mPresenter.startRequest(GET,MyUrl.FIND_COMING_SOON_MOVIE_LIST, comingSoonMovieType, comingSoonMovieMap);
-                mPresenter.startRequest(GET,MyUrl.FIND_HOT_MOVIE_LIST,hotMovieType,hotMovieMap);
-                mPresenter.startRequest(GET,MyUrl.BANNER,bannerType,null);
+                //判断网络
+                if(NetUtil.getInstance().isConnected()){
+                    //更改flag值
+                    listData1 = false;
+                    listData2 = false;
+                    listData3 = false;
+                    //发起请求
+                    mPresenter.startRequest(GET, MyUrl.FIND_RELEASE_MOVIE_LIST, releaseMovieType ,releaseMovieMap);
+                    mPresenter.startRequest(GET,MyUrl.FIND_COMING_SOON_MOVIE_LIST, comingSoonMovieType, comingSoonMovieMap);
+                    mPresenter.startRequest(GET,MyUrl.FIND_HOT_MOVIE_LIST,hotMovieType,hotMovieMap);
+                    mPresenter.startRequest(GET,MyUrl.BANNER,bannerType,null);
+                } else {
+                    twinklingRl.finishRefreshing();
+                }
             }
         });
         //设置布局管理器

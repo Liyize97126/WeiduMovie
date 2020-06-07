@@ -27,7 +27,6 @@ import com.bw.movie.fragment.moviedetailfragment.NoticeFragment;
 import com.bw.movie.fragment.moviedetailfragment.StillFragment;
 import com.bw.movie.presenter.PresenterImpl;
 import com.bw.movie.url.MyUrl;
-import com.bw.movie.util.MyApplication;
 import com.bw.movie.util.NetUtil;
 import com.bw.movie.util.TimesFormatUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -261,8 +260,6 @@ public class MoviesDetailActivity extends BaseActivity {
                     Toast.makeText(this,((DataBean) o).getMessage(),Toast.LENGTH_LONG).show();
                     //判断是否登录
                     if(((DataBean) o).getStatus().equals("9999")){
-                        //设置全局用户状态
-                        MyApplication.getSharedPreferences().edit().putBoolean("loginValidity",false).commit();
                         //跳转到登录页面
                         Intent intent = new Intent(this, LoginActivity.class);
                         startActivity(intent);
