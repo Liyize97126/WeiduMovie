@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.activity.MoviesDetailActivity;
+import com.bw.movie.activity.SearchActivity;
 import com.bw.movie.adapter.ComingSoonMovieListAdapter;
 import com.bw.movie.adapter.HotMovieListAdapter;
 import com.bw.movie.adapter.ReleaseMovieListAdapter;
@@ -53,6 +54,7 @@ public class MovieListFragment extends BaseFragment {
     //定义
     private TwinklingRefreshLayout twinklingRl;
     private XBanner xBan;
+    private ImageView searchDo;
     private TextView xBanNum,name,score;
     private SimpleDraweeView horizontalImage;
     private RelativeLayout jumpMovieDetail;
@@ -75,6 +77,7 @@ public class MovieListFragment extends BaseFragment {
     protected void initViews(View mContentView) {
         //获取ID
         xBan = mContentView.findViewById(R.id.x_ban);
+        searchDo = mContentView.findViewById(R.id.search_do);
         xBanNum = mContentView.findViewById(R.id.x_ban_num);
         name = mContentView.findViewById(R.id.name);
         score = mContentView.findViewById(R.id.score);
@@ -103,8 +106,18 @@ public class MovieListFragment extends BaseFragment {
         hotMovieMap = new HashMap<>();
         hotMovieMap.put("page",1);
         hotMovieMap.put("count",6);
+        //设置点击事件
+        searchDo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //执行跳转
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                intent.putExtra("flag",SearchActivity.SEARCH_MOVIE);
+                startActivity(intent);
+            }
+        });
         //TwinklingRefreshLayout设置
-        //禁用下拉加载
+        //禁用上拉加载
         twinklingRl.setEnableLoadmore(false);
         //刷新监听
         twinklingRl.setOnRefreshListener(new RefreshListenerAdapter() {
