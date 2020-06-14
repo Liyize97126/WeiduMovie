@@ -52,7 +52,7 @@ public class StillFragment extends BaseFragment {
     }
     //接收订阅者消息
     @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
-    public void postMovieActorBean(Object obj){
+    public void postMovieDetailListBean(Object obj){
         //确认数据类型
         if(obj instanceof MoviesDetail) {
             //添加数据

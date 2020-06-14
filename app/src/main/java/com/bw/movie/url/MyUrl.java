@@ -68,6 +68,16 @@ public interface MyUrl {
     String FIND_RECOMMEND_CINEMAS = "movieApi/cinema/v1/findRecommendCinemas";
     //查询附近影院
     String FIND_NEAR_BY_CINEMAS = "movieApi/cinema/v1/findNearbyCinemas";
+    //查询电影信息明细
+    String FIND_CINEMA_INFO = "movieApi/cinema/v1/findCinemaInfo";
+    //根据电影院名称模糊查询电影院
+    String FIND_ALL_CINEMAS = "movieApi/cinema/v1/findAllCinemas";
+    //关注影院
+    String FOLLOW_CINEMA = "movieApi/cinema/v1/verify/followCinema";
+    //取消关注影院
+    String CANCEL_FOLLOW_CINEMA = "movieApi/cinema/v1/verify/cancelFollowCinema";
+    //查询影院用户评论列表
+    String FIND_ALL_CINEMA_COMMENT = "movieApi/cinema/v1/findAllCinemaComment";
     //4-10
     //根据区域查询影院
     String FIND_CINEMA_BY_REGION = "movieApi/cinema/v2/findCinemaByRegion";

@@ -1,5 +1,6 @@
 package com.bw.movie.fragment.cinemafragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bw.movie.R;
+import com.bw.movie.activity.CinemaDetailActivity;
 import com.bw.movie.adapter.RecommendCinemasListAdapter;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
@@ -53,6 +55,15 @@ public class RecommendCinemaFragment extends BaseFragment {
         recommendCinemasListAdapter = new RecommendCinemasListAdapter();
         recommendRecy.setAdapter(recommendCinemasListAdapter);
         map = new HashMap<>();
+        //点击回调
+        recommendCinemasListAdapter.setDataCallBack(new RecommendCinemasListAdapter.DataCallBack() {
+            @Override
+            public void dataCall(long id) {
+                //调用跳转方法
+                jumpCinemaDetailActivity((int) id);
+            }
+        });
+        //泛型类设置
         recommendCinemasType = new TypeToken<DataListBean<RecommendCinemasList>>() {
         }.getType();
         //参数设置
@@ -129,5 +140,14 @@ public class RecommendCinemaFragment extends BaseFragment {
     }
     @Override
     public void onFail(String err) {
+    }
+    //封装统一跳转影院详情的方法
+    private void jumpCinemaDetailActivity(int cinemaId){
+        //跳转
+        Intent intent = new Intent(getActivity(), CinemaDetailActivity.class);
+        //传值
+        intent.putExtra("cinemaId", cinemaId);
+        //完成跳转
+        startActivity(intent);
     }
 }

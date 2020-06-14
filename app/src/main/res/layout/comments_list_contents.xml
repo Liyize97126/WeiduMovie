@@ -13,11 +13,10 @@
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/comment_head_pic"
-            android:layout_width="@dimen/dp_120"
-            android:layout_height="@dimen/dp_120"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_60"
             app:placeholderImage="@drawable/movie_zhan"
             app:failureImage="@color/colorZhanBackground"
-            android:background="@color/colorZhanBackground"
             app:roundAsCircle="true"/>
 
         <TextView
@@ -27,6 +26,7 @@
             android:text="用户昵称"
             android:textSize="@dimen/sp_18"
             android:layout_centerVertical="true"
+            android:textColor="@color/colorTextWrite"
             android:layout_toRightOf="@id/comment_head_pic"
             android:layout_marginLeft="@dimen/dp_25"/>
 
@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"
         android:text="评论正文"
         android:layout_marginTop="@dimen/dp_10"
-        android:textSize="@dimen/sp_16"/>
+        android:textSize="@dimen/sp_16"
+        android:textColor="@color/colorTextWrite"/>
 
 </LinearLayout>

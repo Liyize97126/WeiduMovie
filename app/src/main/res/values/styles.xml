@@ -12,5 +12,10 @@
     <style name="TabLayoutTextStyle">
         <item name="android:textSize">@dimen/sp_18</item>
     </style>
+    <!--  TabLayout文字大小  -->
+    <style name="TabLayoutTextStyle2">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>

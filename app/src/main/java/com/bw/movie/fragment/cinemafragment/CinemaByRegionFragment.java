@@ -1,11 +1,13 @@
 package com.bw.movie.fragment.cinemafragment;
 
+import android.content.Intent;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bw.movie.R;
+import com.bw.movie.activity.CinemaDetailActivity;
 import com.bw.movie.adapter.CinemaByRegionListAdapter;
 import com.bw.movie.adapter.RegionListAdapter;
 import com.bw.movie.base.BaseFragment;
@@ -73,7 +75,12 @@ public class CinemaByRegionFragment extends BaseFragment {
         cinemaByRegionListAdapter.setItemClick(new CinemaByRegionListAdapter.ItemClick() {
             @Override
             public void setOnItemClick(int id) {
-                //跳转页面
+                //跳转
+                Intent intent = new Intent(getActivity(), CinemaDetailActivity.class);
+                //传值
+                intent.putExtra("cinemaId", id);
+                //完成跳转
+                startActivity(intent);
             }
         });
     }

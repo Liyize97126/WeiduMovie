@@ -28,8 +28,12 @@ import java.util.List;
 public class RecommendCinemasListAdapter extends RecyclerView.Adapter<RecommendCinemasListAdapter.MyViewHolder> {
     //定义
     private List<RecommendCinemasList> list = new ArrayList<>();
+    private DataCallBack dataCallBack;
     public List<RecommendCinemasList> getList() {
         return list;
+    }
+    public void setDataCallBack(DataCallBack dataCallBack) {
+        this.dataCallBack = dataCallBack;
     }
     //方法实现
     @NonNull
@@ -51,6 +55,17 @@ public class RecommendCinemasListAdapter extends RecyclerView.Adapter<RecommendC
                 .setImageRequest(build)
                 .build();
         holder.logo.setController(controller);
+        //设置点击事件
+        holder.itemView.setTag(recommendCinemasList.getId());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //判断
+                if(dataCallBack != null){
+                    dataCallBack.dataCall((long) v.getTag());
+                }
+            }
+        });
     }
     @Override
     public int getItemCount() {
@@ -67,5 +82,9 @@ public class RecommendCinemasListAdapter extends RecyclerView.Adapter<RecommendC
             name = itemView.findViewById(R.id.name);
             address = itemView.findViewById(R.id.address);
         }
+    }
+    //点击事件回调
+    public interface DataCallBack{
+        void dataCall(long id);
     }
 }

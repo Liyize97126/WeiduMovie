@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bw.movie.R;
-import com.bw.movie.bean.MovieDetailCommentsList;
+import com.bw.movie.bean.CinemaDetailCommentsList;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -21,40 +21,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 电影详情页影评列表适配器
+ * 影院详情页影评列表适配器
  * 李易泽
- * 20200604
+ * 20200612
  */
-public class MovieDetailCommentsAdapter extends RecyclerView.Adapter<MovieDetailCommentsAdapter.MyHolder> {
+public class CinemaDetailCommentsAdapter extends RecyclerView.Adapter<CinemaDetailCommentsAdapter.MyHolder> {
     //定义
-    private List<MovieDetailCommentsList> list = new ArrayList<>();
+    private List<CinemaDetailCommentsList> list = new ArrayList<>();
     //封装
-    public List<MovieDetailCommentsList> getList() {
+    public List<CinemaDetailCommentsList> getList() {
         return list;
     }
     //方法实现
     //初始化视图
     @NonNull
     @Override
-    public MovieDetailCommentsAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CinemaDetailCommentsAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.comments_list_contents, parent, false);
         return new MyHolder(view);
     }
     //设置数据
     @Override
-    public void onBindViewHolder(@NonNull MovieDetailCommentsAdapter.MyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CinemaDetailCommentsAdapter.MyHolder holder, int position) {
         //获取数据
-        MovieDetailCommentsList movieDetailCommentsList = list.get(position);
+        CinemaDetailCommentsList cinemaDetailCommentsList = list.get(position);
         //Fresco图片渐进式加载
-        ImageRequest build = ImageRequestBuilder.newBuilderWithSource(Uri.parse(movieDetailCommentsList.getCommentHeadPic()))
+        ImageRequest build = ImageRequestBuilder.newBuilderWithSource(Uri.parse(cinemaDetailCommentsList.getCommentHeadPic()))
                 .setProgressiveRenderingEnabled(true).build();
         AbstractDraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setImageRequest(build)
                 .build();
         holder.commentHeadPic.setController(controller);
         //设置文本
-        holder.commentUserName.setText(movieDetailCommentsList.getCommentUserName());
-        holder.commentContent.setText(movieDetailCommentsList.getCommentContent());
+        holder.commentUserName.setText(cinemaDetailCommentsList.getCommentUserName());
+        holder.commentContent.setText(cinemaDetailCommentsList.getCommentContent());
     }
     //条目总数
     @Override
