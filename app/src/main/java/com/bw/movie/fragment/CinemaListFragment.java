@@ -1,5 +1,6 @@
 package com.bw.movie.fragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bw.movie.R;
+import com.bw.movie.activity.SearchActivity;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.CinemaTabBean;
@@ -47,6 +49,16 @@ public class CinemaListFragment extends BaseFragment {
         cinemaTabLay = mContentView.findViewById(R.id.cinema_tab_lay);
         cinemaViewPag = mContentView.findViewById(R.id.cinema_view_pag);
         list = new ArrayList<>();
+        //设置点击事件
+        searchDo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //执行跳转
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                intent.putExtra("flag",SearchActivity.SEARCH_CINEMA);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     protected BasePresenter initPresenter() {

@@ -15,10 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bw.movie.R;
+import com.bw.movie.adapter.CinemaSearchResultListAdapter;
 import com.bw.movie.adapter.MovieSearchResultListAdapter;
 import com.bw.movie.adapter.ReleaseMovieListAdapter;
 import com.bw.movie.base.BaseActivity;
 import com.bw.movie.base.BasePresenter;
+import com.bw.movie.bean.CinemaSearchResultList;
 import com.bw.movie.bean.DataListBean;
 import com.bw.movie.bean.MovieSearchResultList;
 import com.bw.movie.presenter.PresenterImpl;
@@ -55,6 +57,7 @@ public class SearchActivity extends BaseActivity {
     private Type type;
     private Map<String, Object> map;
     private MovieSearchResultListAdapter movieSearchResultListAdapter;
+    private CinemaSearchResultListAdapter cinemaSearchResultListAdapter;
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -85,7 +88,11 @@ public class SearchActivity extends BaseActivity {
         keyword = findViewById(R.id.keyword);
         twinklingRl = findViewById(R.id.twinkling_rl);
         searchResultRecy = findViewById(R.id.search_result_recy);
+        //初始化Map容器
         map = new HashMap<>();
+        //设置固定参数
+        map.put("page",page);
+        map.put("count",8);
         //TwinklingRefreshLayout设置
         //禁用下拉刷新
         twinklingRl.setEnableRefresh(false);
@@ -135,10 +142,32 @@ public class SearchActivity extends BaseActivity {
                 }.getType();
                 //设置加载参数
                 map.put("keyword",keyword.getText().toString());
-                map.put("page",page);
-                map.put("count",10);
             }break;
-            case SEARCH_CINEMA:{}break;
+            case SEARCH_CINEMA:{
+                //代表搜索电影，设置文本框提示文本
+                keyword.setHint("请输入影院名称");
+                //设置影院列表适配器
+                cinemaSearchResultListAdapter = new CinemaSearchResultListAdapter();
+                searchResultRecy.setAdapter(cinemaSearchResultListAdapter);
+                cinemaSearchResultListAdapter.setDataCallBack(new CinemaSearchResultListAdapter.DataCallBack() {
+                    @Override
+                    public void jumpMovieDetail(long cinemaId) {
+                        //跳转
+                        Intent intent = new Intent(SearchActivity.this, CinemaDetailActivity.class);
+                        //传值
+                        intent.putExtra("cinemaId", (int) cinemaId);
+                        //完成跳转
+                        startActivity(intent);
+                    }
+                });
+                //请求的链接
+                url = MyUrl.FIND_ALL_CINEMAS;
+                //泛型类处理
+                type = new TypeToken<DataListBean<CinemaSearchResultList>>() {
+                }.getType();
+                //设置加载参数
+                map.put("cinemaName",keyword.getText().toString());
+            }break;
             case SEARCH_ERROR:{
                 throw new IllegalArgumentException("参数读取异常！");
             }
@@ -159,6 +188,8 @@ public class SearchActivity extends BaseActivity {
             //请求数据
             mPresenter.startRequest(GET,url,type,map);
         } else {
+            //提示
+            Toast.makeText(SearchActivity.this,"网络似乎开小差了，请检查下网络吧！",Toast.LENGTH_LONG).show();
         }
         //文本框监听
         keyword.addTextChangedListener(new TextWatcher() {
@@ -178,7 +209,9 @@ public class SearchActivity extends BaseActivity {
                         case SEARCH_MOVIE:{
                             map.put("keyword",keyword.getText().toString());
                         }break;
-                        case SEARCH_CINEMA:{}break;
+                        case SEARCH_CINEMA:{
+                            map.put("cinemaName",keyword.getText().toString());
+                        }break;
                     }
                     //修改页数
                     page = 1;
@@ -186,6 +219,8 @@ public class SearchActivity extends BaseActivity {
                     //发送消息
                     handler.sendEmptyMessageDelayed(0,1000);
                 } else {
+                    //提示
+                    Toast.makeText(SearchActivity.this,"网络似乎开小差了，请检查下网络吧！",Toast.LENGTH_LONG).show();
                 }
             }
             //文本变化后执行
@@ -213,19 +248,33 @@ public class SearchActivity extends BaseActivity {
             List result = ((DataListBean) o).getResult();
             //判断集合是否有数据
             if(result != null){
-                //instanceof判断
-                if(result.get(0) instanceof MovieSearchResultList){
-                    //清空数据
-                    if(page == 1){
-                        movieSearchResultListAdapter.getList().clear();
+                if(result.size() > 0){
+                    //instanceof判断
+                    if(result.get(0) instanceof MovieSearchResultList){
+                        //清空数据
+                        if(page == 1){
+                            movieSearchResultListAdapter.getList().clear();
+                        }
+                        //添加数据并刷新
+                        movieSearchResultListAdapter.getList().addAll(result);
+                        movieSearchResultListAdapter.notifyDataSetChanged();
                     }
-                    //添加数据并刷新
-                    movieSearchResultListAdapter.getList().addAll(result);
-                    movieSearchResultListAdapter.notifyDataSetChanged();
+                    if(result.get(0) instanceof CinemaSearchResultList){
+                        //清空数据
+                        if(page == 1){
+                            cinemaSearchResultListAdapter.getList().clear();
+                        }
+                        //添加数据并刷新
+                        cinemaSearchResultListAdapter.getList().addAll(result);
+                        cinemaSearchResultListAdapter.notifyDataSetChanged();
+                    }
+                } else {
+                    //提示
+                    Toast.makeText(this,"没有数据了！",Toast.LENGTH_LONG).show();
                 }
             } else {
                 //提示
-                Toast.makeText(this,((DataListBean) o).getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"没有数据了！",Toast.LENGTH_LONG).show();
             }
         }
         //停止加载更多
