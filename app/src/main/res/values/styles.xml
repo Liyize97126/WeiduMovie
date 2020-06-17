@@ -17,5 +17,9 @@
         <item name="android:textSize">@dimen/sp_16</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <!--  TabLayout文字大小  -->
+    <style name="TabLayoutTextStyle3">
+        <item name="android:textSize">@dimen/sp_16</item>
+    </style>
 
 </resources>

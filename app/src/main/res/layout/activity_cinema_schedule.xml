@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CinemaScheduleActivity"
+    android:orientation="vertical"
+    android:background="@color/colorActivityBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_20">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电影排期"
+            android:textSize="@dimen/sp_20"
+            android:textColor="@color/colorTextWrite"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <!--  app:tabMode="fixed"表示固定不滑动，"scrollable"为可滑动的  -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/cinema_schedule_tab_lay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:background="#1E2444"
+        app:tabMaxWidth="@dimen/dp_0"
+        app:tabMode="scrollable"
+        app:tabTextColor="@color/colorTextWrite"
+        app:tabTextAppearance="@style/TabLayoutTextStyle3"
+        app:tabIndicatorHeight="@dimen/dp_4"
+        app:tabIndicatorFullWidth="false"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/cinema_schedule_view_pag"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.CinemaDetailActivity"></activity>
+        <activity android:name=".activity.CinemaScheduleActivity"></activity>
+        <activity android:name=".activity.CinemaDetailActivity" />
         <activity android:name=".activity.SearchActivity" />
         <activity android:name=".activity.WriteEvaluationActivity" />
         <activity android:name=".activity.RegisterActivity" />

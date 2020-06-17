@@ -1,10 +1,12 @@
 package com.bw.movie.fragment.cinemadetailfragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.bw.movie.R;
+import com.bw.movie.activity.CinemaScheduleActivity;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.CinemasDetail;
@@ -22,6 +24,7 @@ public class CinemaDetailFragment extends BaseFragment {
     //定义
     private TextView address,phone,vehicleRoute;
     private Button cinemaScheduleListDo;
+    private int cinemaId;
     //方法实现
     @Override
     protected int getFragmentLayoutId() {
@@ -40,6 +43,10 @@ public class CinemaDetailFragment extends BaseFragment {
         cinemaScheduleListDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //执行跳转
+                Intent intent = new Intent(getActivity(), CinemaScheduleActivity.class);
+                intent.putExtra("cinemaId",cinemaId);
+                startActivity(intent);
             }
         });
         //地址跑马显示效果
@@ -61,6 +68,7 @@ public class CinemaDetailFragment extends BaseFragment {
         //确认数据类型
         if(obj instanceof CinemasDetail) {
             //添加数据
+            cinemaId = (int) ((CinemasDetail) obj).getId();
             address.setText(((CinemasDetail) obj).getAddress());
             phone.setText(((CinemasDetail) obj).getPhone());
             vehicleRoute.setText(((CinemasDetail) obj).getVehicleRoute());

@@ -81,6 +81,8 @@ public interface MyUrl {
     //4-10
     //根据区域查询影院
     String FIND_CINEMA_BY_REGION = "movieApi/cinema/v2/findCinemaByRegion";
+    //查询影院下的电影排期
+    String FIND_CINEMA_SCHEDULE_LIST = "movieApi/cinema/v2/findCinemaScheduleList";
     //5-8
     //查询banner
     String BANNER = "movieApi/tool/v2/banner";
