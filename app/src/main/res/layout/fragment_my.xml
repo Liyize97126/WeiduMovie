@@ -139,7 +139,7 @@
                         <ImageView
                             android:layout_width="@dimen/dp_40"
                             android:layout_height="@dimen/dp_40"
-                            android:src="@mipmap/ic_launcher_round"
+                            android:src="@drawable/my_focus"
                             android:layout_gravity="center_horizontal"/>
 
                         <TextView
@@ -163,7 +163,7 @@
                         <ImageView
                             android:layout_width="@dimen/dp_40"
                             android:layout_height="@dimen/dp_40"
-                            android:src="@mipmap/ic_launcher_round"
+                            android:src="@drawable/my_appointment"
                             android:layout_gravity="center_horizontal"/>
 
                         <TextView
@@ -187,7 +187,7 @@
                         <ImageView
                             android:layout_width="@dimen/dp_40"
                             android:layout_height="@dimen/dp_40"
-                            android:src="@mipmap/ic_launcher_round"
+                            android:src="@drawable/goupiaojilu"
                             android:layout_gravity="center_horizontal"/>
 
                         <TextView
@@ -218,7 +218,7 @@
                         <ImageView
                             android:layout_width="@dimen/dp_40"
                             android:layout_height="@dimen/dp_40"
-                            android:src="@mipmap/ic_launcher_round"
+                            android:src="@drawable/watched_movies"
                             android:layout_gravity="center_horizontal"/>
 
                         <TextView
@@ -242,7 +242,7 @@
                         <ImageView
                             android:layout_width="@dimen/dp_40"
                             android:layout_height="@dimen/dp_40"
-                            android:src="@mipmap/ic_launcher_round"
+                            android:src="@drawable/my_comments"
                             android:layout_gravity="center_horizontal"/>
 
                         <TextView
@@ -266,7 +266,7 @@
                         <ImageView
                             android:layout_width="@dimen/dp_40"
                             android:layout_height="@dimen/dp_40"
-                            android:src="@mipmap/ic_launcher_round"
+                            android:src="@drawable/yijianfankui"
                             android:layout_gravity="center_horizontal"/>
 
                         <TextView
@@ -297,7 +297,7 @@
                         <ImageView
                             android:layout_width="@dimen/dp_40"
                             android:layout_height="@dimen/dp_40"
-                            android:src="@mipmap/ic_launcher_round"
+                            android:src="@drawable/settings"
                             android:layout_gravity="center_horizontal"/>
 
                         <TextView
