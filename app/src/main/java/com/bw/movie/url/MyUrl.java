@@ -50,7 +50,11 @@ public interface MyUrl {
     String FIND_MOVIES_DETAIL = "movieApi/movie/v2/findMoviesDetail";
     //根据电影的id查询电影评论
     String FIND_ALL_MOVIE_COMMENT = "movieApi/movie/v2/findAllMovieComment";
-    //3-6~3-10
+    //3-6~3-8
+    //根据影厅id查询座位信息
+    String FIND_SEAT_INFO = "movieApi/movie/v2/findSeatInfo";
+    //根据电影ID和影院ID查询电影排期列表
+    String FIND_MOVIE_SCHEDULE = "movieApi/movie/v2/findMovieSchedule";
     //关注电影
     String FOLLOW_MOVIE = "movieApi/movie/v1/verify/followMovie";
     //取消关注电影

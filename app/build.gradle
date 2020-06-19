@@ -85,4 +85,6 @@ dependencies {
     implementation 'com.amap.api:location:4.4.0'
     //自定框架：XToast
     implementation project(path: ':xtoastlibrary')
+    //选座框架
+    implementation project(path: ':xuanzuolibrary')
 }

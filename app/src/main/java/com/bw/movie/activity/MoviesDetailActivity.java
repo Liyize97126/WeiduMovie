@@ -66,7 +66,7 @@ public class MoviesDetailActivity extends BaseActivity {
     private ViewPager movieDetailViewPag;
     private Button addMovieComment, buyMovieTicketDo;
     private List<MoviesDetailTabBean> moviesDetailTabBeanList;
-    private int movieId;
+    private int movieId,cinemaId;
     private String movieName;
     //方法实现
     @Override
@@ -128,6 +128,7 @@ public class MoviesDetailActivity extends BaseActivity {
         movieDetailTabLay.setupWithViewPager(movieDetailViewPag);
         //获取值
         movieId = getIntent().getIntExtra("movieId", -1);
+        cinemaId = getIntent().getIntExtra("cinemaId",-1);
         //泛型类处理
         type = new TypeToken<DataBean<MoviesDetail>>() {
         }.getType();
@@ -154,8 +155,21 @@ public class MoviesDetailActivity extends BaseActivity {
         buyMovieTicketDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //提示
-                Toast.makeText(MoviesDetailActivity.this,"正在开发中，敬请期待！",Toast.LENGTH_LONG).show();
+                //判断
+                if(cinemaId != -1){
+                    //跳转至选座
+                    //跳转
+                    Intent intent = new Intent(MoviesDetailActivity.this, ChooseSeatActivity.class);
+                    //传值
+                    intent.putExtra("movieId", movieId);
+                    intent.putExtra("cinemaId", cinemaId);
+                    intent.putExtra("name",movieName);
+                    //完成跳转
+                    startActivity(intent);
+                } else {
+                    //提示
+                    Toast.makeText(MoviesDetailActivity.this,"正在开发中，敬请期待！",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

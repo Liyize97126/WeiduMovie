@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -62,6 +63,18 @@ public class CinemaScheduleListAdapter extends RecyclerView.Adapter<CinemaSchedu
         holder.starring.setText("主演：" + cinemaScheduleList.getStarring());
         holder.score.setText("评分：" + cinemaScheduleList.getScore() + "分");
         //点击监听
+        holder.chooseSeatDo.setTag(cinemaScheduleList);
+        holder.chooseSeatDo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CinemaScheduleList cinemaScheduleList = (CinemaScheduleList) v.getTag();
+                //判断
+                if(dataCallBack != null){
+                    //完成回调
+                    dataCallBack.jumpChooseSeat(cinemaScheduleList);
+                }
+            }
+        });
         holder.itemView.setTag(cinemaScheduleList.getMovieId());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +98,7 @@ public class CinemaScheduleListAdapter extends RecyclerView.Adapter<CinemaSchedu
         //定义
         protected SimpleDraweeView imageUrl;
         protected TextView name,director,starring,score;
+        protected Button chooseSeatDo;
         //初始化
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,10 +107,12 @@ public class CinemaScheduleListAdapter extends RecyclerView.Adapter<CinemaSchedu
             director = itemView.findViewById(R.id.director);
             starring = itemView.findViewById(R.id.starring);
             score = itemView.findViewById(R.id.score);
+            chooseSeatDo = itemView.findViewById(R.id.choose_seat_do);
         }
     }
     //声明回调
     public interface DataCallBack {
         void jumpMovieDetail(long movieId);
+        void jumpChooseSeat(CinemaScheduleList cinemaScheduleList);
     }
 }

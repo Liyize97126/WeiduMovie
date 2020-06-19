@@ -72,6 +72,7 @@
             android:layout_below="@id/starring"/>
 
         <Button
+            android:id="@+id/choose_seat_do"
             android:layout_width="@dimen/dp_60"
             android:layout_height="@dimen/dp_30"
             android:text="购票"

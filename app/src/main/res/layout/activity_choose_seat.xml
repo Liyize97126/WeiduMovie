@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ChooseSeatActivity"
+    android:background="@color/colorActivityBackground">
+
+    <RelativeLayout
+        android:id="@+id/ding1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_20">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_10"/>
+
+        <TextView
+            android:id="@+id/movie_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电影名称"
+            android:textSize="@dimen/sp_20"
+            android:textColor="@color/colorTextWrite"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <com.bawei.xuanzuolibrary.XZView
+        android:id="@+id/xz_v"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_325"
+        android:layout_below="@id/ding1"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_10"/>
+
+    <LinearLayout
+        android:id="@+id/ding2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/xz_v"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_25">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorTextWrite"
+            android:text="选择影厅和时间"
+            android:textSize="@dimen/sp_18"/>
+
+        <TextView
+            android:id="@+id/hall_num"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorTextWrite"
+            android:text="（6）"
+            android:textSize="@dimen/sp_18"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/hall_and_time_recy"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_88"
+        android:layout_below="@id/ding2"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_15"/>
+
+    <Button
+        android:id="@+id/buy_movie_tickets_do"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="@drawable/button_style_pink_no_corners"
+        android:text="请先选座"
+        android:textColor="@color/colorTextWrite"
+        android:textSize="@dimen/sp_18"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bw.movie.R;
+import com.bw.movie.activity.ChooseSeatActivity;
 import com.bw.movie.activity.MoviesDetailActivity;
 import com.bw.movie.adapter.CinemaScheduleListAdapter;
 import com.bw.movie.base.BaseFragment;
@@ -68,6 +69,18 @@ public class CinemaScheduleFragment extends BaseFragment {
                 Intent intent = new Intent(getContext(), MoviesDetailActivity.class);
                 //传值
                 intent.putExtra("movieId", (int) movieId);
+                intent.putExtra("cinemaId", cinemaId);
+                //完成跳转
+                startActivity(intent);
+            }
+            @Override
+            public void jumpChooseSeat(CinemaScheduleList cinemaScheduleList) {
+                //跳转
+                Intent intent = new Intent(getContext(), ChooseSeatActivity.class);
+                //传值
+                intent.putExtra("movieId", (int) cinemaScheduleList.getMovieId());
+                intent.putExtra("cinemaId", cinemaId);
+                intent.putExtra("name",cinemaScheduleList.getName());
                 //完成跳转
                 startActivity(intent);
             }
