@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 影院页推荐影院列表适配器
+ * 影院页推荐影院和附近影院列表适配器
  * 李易泽
  * 20200530
  */
@@ -29,11 +29,15 @@ public class RecommendCinemasListAdapter extends RecyclerView.Adapter<RecommendC
     //定义
     private List<RecommendCinemasList> list = new ArrayList<>();
     private DataCallBack dataCallBack;
+    private boolean isDistanceInfo = false;
     public List<RecommendCinemasList> getList() {
         return list;
     }
     public void setDataCallBack(DataCallBack dataCallBack) {
         this.dataCallBack = dataCallBack;
+    }
+    public void setDistanceInfo(boolean distanceInfo) {
+        isDistanceInfo = distanceInfo;
     }
     //方法实现
     @NonNull
@@ -55,6 +59,15 @@ public class RecommendCinemasListAdapter extends RecyclerView.Adapter<RecommendC
                 .setImageRequest(build)
                 .build();
         holder.logo.setController(controller);
+        //判断是否有距离信息
+        if(isDistanceInfo){
+            //获取距离信息（同时进行换算）并设置
+            double distance = (recommendCinemasList.getDistance()/1000);
+            holder.distance.setText(String.format("%.1f", distance) + "km");
+        } else {
+            //隐藏距离信息
+            holder.distance.setVisibility(View.GONE);
+        }
         //设置点击事件
         holder.itemView.setTag(recommendCinemasList.getId());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -75,12 +88,13 @@ public class RecommendCinemasListAdapter extends RecyclerView.Adapter<RecommendC
     public class MyViewHolder extends RecyclerView.ViewHolder {
         //定义
         protected SimpleDraweeView logo;
-        protected TextView name,address;
+        protected TextView name,address,distance;
         protected MyViewHolder(@NonNull View itemView) {
             super(itemView);
             logo = itemView.findViewById(R.id.logo);
             name = itemView.findViewById(R.id.name);
             address = itemView.findViewById(R.id.address);
+            distance = itemView.findViewById(R.id.distance);
         }
     }
     //点击事件回调

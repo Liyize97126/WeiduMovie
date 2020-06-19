@@ -1,6 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('E:\\Data\\Android\\Workspace\\WeiduMovie\\app\\movie.keystore')
+            storePassword '123456'
+            keyAlias = 'bw_movie'
+            keyPassword '123456'
+        }
+        release {
+            storeFile file('E:\\Data\\Android\\Workspace\\WeiduMovie\\app\\movie.keystore')
+            storePassword '123456'
+            keyPassword '123456'
+            keyAlias = 'bw_movie'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
@@ -9,12 +23,19 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        //处理这个错误的Cannot fit requested classes in a single dex file (# methods: 72725 > 65536)
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
 }
@@ -60,5 +81,8 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.2.0'
     //视频播放框架：JCVideoPlayerStandard
     implementation 'fm.jiecao:jiecaovideoplayer:4.8.3'
+    //定位
+    implementation 'com.amap.api:location:4.4.0'
+    //自定框架：XToast
     implementation project(path: ':xtoastlibrary')
 }

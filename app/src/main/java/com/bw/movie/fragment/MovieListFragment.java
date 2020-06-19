@@ -2,15 +2,20 @@ package com.bw.movie.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationListener;
 import com.bumptech.glide.Glide;
 import com.bw.movie.R;
 import com.bw.movie.activity.MoviesDetailActivity;
@@ -55,7 +60,7 @@ public class MovieListFragment extends BaseFragment {
     private TwinklingRefreshLayout twinklingRl;
     private XBanner xBan;
     private ImageView searchDo;
-    private TextView xBanNum,name,score;
+    private TextView xBanNum,name,score,locationName;
     private SimpleDraweeView horizontalImage;
     private RelativeLayout jumpMovieDetail;
     private RecyclerView mZZRYRecy,mJJSYRecy,mRNDYRecy;
@@ -66,6 +71,13 @@ public class MovieListFragment extends BaseFragment {
     private Map<String, Object> releaseMovieMap,comingSoonMovieMap,hotMovieMap;
     private Type releaseMovieType,comingSoonMovieType,hotMovieType,bannerType;
     private int bannerNumber;
+    private boolean isPositioning = false;
+    //声明AMapLocationClient类对象
+    private AMapLocationClient mLocationClient;
+    //构造
+    public MovieListFragment(AMapLocationClient mLocationClient) {
+        this.mLocationClient = mLocationClient;
+    }
     //方法实现
     //布局
     @Override
@@ -81,6 +93,7 @@ public class MovieListFragment extends BaseFragment {
         xBanNum = mContentView.findViewById(R.id.x_ban_num);
         name = mContentView.findViewById(R.id.name);
         score = mContentView.findViewById(R.id.score);
+        locationName = mContentView.findViewById(R.id.location_name);
         horizontalImage = mContentView.findViewById(R.id.horizontal_image);
         twinklingRl = mContentView.findViewById(R.id.twinkling_rl);
         jumpMovieDetail = mContentView.findViewById(R.id.jump_movie_detail);
@@ -106,7 +119,50 @@ public class MovieListFragment extends BaseFragment {
         hotMovieMap = new HashMap<>();
         hotMovieMap.put("page",1);
         hotMovieMap.put("count",6);
+        //定位功能
+        //设置定位回调监听
+        mLocationClient.setLocationListener(new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation aMapLocation) {
+                if (aMapLocation != null) {
+                    if (aMapLocation.getErrorCode() == 0) {
+                        //解析定位结果
+                        String province = aMapLocation.getProvince();//省信息
+                        String city = aMapLocation.getCity();//城市信息
+                        //提示
+                        locationName.setText(province + city);
+                    } else {
+                        //错误提示
+                        locationName.setText("定位出错");
+                        Toast.makeText(getContext(),"无法获取位置，请重试！",Toast.LENGTH_LONG).show();
+                        Log.i("Location",aMapLocation.getErrorCode() + ":" + aMapLocation.getErrorInfo());
+                    }
+                }
+                //结束定位
+                isPositioning = false;
+                mLocationClient.stopLocation();
+            }
+        });
         //设置点击事件
+        locationName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //判断定位状态
+                if(isPositioning){
+                    Toast.makeText(getContext(),"正在定位中，请稍等……",Toast.LENGTH_LONG).show();
+                } else {
+                    //判断网络
+                    if(NetUtil.getInstance().isConnected()){
+                        //重新定位
+                        isPositioning = true;
+                        locationName.setText("定位中...");
+                        mLocationClient.startLocation();
+                    } else {
+                        locationName.setText("请连接网络");
+                    }
+                }
+            }
+        });
         searchDo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,6 +182,10 @@ public class MovieListFragment extends BaseFragment {
                 super.onRefresh(refreshLayout);
                 //判断网络
                 if(NetUtil.getInstance().isConnected()){
+                    //启动定位
+                    locationName.setText("定位中...");
+                    isPositioning = true;
+                    mLocationClient.startLocation();
                     //更改flag值
                     listData1 = false;
                     listData2 = false;
@@ -136,6 +196,7 @@ public class MovieListFragment extends BaseFragment {
                     mPresenter.startRequest(GET,MyUrl.FIND_HOT_MOVIE_LIST,hotMovieType,hotMovieMap);
                     mPresenter.startRequest(GET,MyUrl.BANNER,bannerType,null);
                 } else {
+                    locationName.setText("请连接网络");
                     twinklingRl.finishRefreshing();
                 }
             }

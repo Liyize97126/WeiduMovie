@@ -34,7 +34,7 @@
                     android:id="@+id/location_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="北京"
+                    android:text="定位中..."
                     android:textColor="@color/colorTextWrite"
                     android:textSize="@dimen/sp_18"
                     android:layout_toRightOf="@id/location_ding"

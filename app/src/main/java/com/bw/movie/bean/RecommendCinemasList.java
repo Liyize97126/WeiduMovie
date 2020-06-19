@@ -1,14 +1,14 @@
 package com.bw.movie.bean;
 
 /**
- * 推荐影院数据类
+ * 推荐影院、附近影院数据类
  * 李易泽
  * 20200530
  */
 public class RecommendCinemasList {
     private String address;
     private int commentTotal;
-    private int distance;
+    private double distance;
     private int followCinema;
     private long id;
     private String logo;
@@ -25,10 +25,10 @@ public class RecommendCinemasList {
     public void setCommentTotal(int commentTotal) {
         this.commentTotal = commentTotal;
     }
-    public int getDistance() {
+    public double getDistance() {
         return distance;
     }
-    public void setDistance(int distance) {
+    public void setDistance(double distance) {
         this.distance = distance;
     }
     public int getFollowCinema() {

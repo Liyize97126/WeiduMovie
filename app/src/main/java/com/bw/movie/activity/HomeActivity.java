@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.amap.api.location.AMapLocationClient;
 import com.bw.movie.R;
 import com.bw.movie.base.BaseActivity;
 import com.bw.movie.base.BaseFragment;
@@ -33,6 +34,8 @@ public class HomeActivity extends BaseActivity {
     private ViewPager viewPag;
     private TabLayout tabLay;
     private List<BaseFragment> fragments;
+    //声明AMapLocationClient类对象
+    private AMapLocationClient mLocationClient;
     //方法实现
     //是否全屏
     @Override
@@ -52,11 +55,13 @@ public class HomeActivity extends BaseActivity {
     //初始化视图
     @Override
     protected void initView() {
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());
         viewPag = findViewById(R.id.view_pag);
         tabLay = findViewById(R.id.tab_lay);
         fragments = new ArrayList<>();
-        fragments.add(new MovieListFragment());
-        fragments.add(new CinemaListFragment());
+        fragments.add(new MovieListFragment(mLocationClient));
+        fragments.add(new CinemaListFragment(mLocationClient));
         fragments.add(new MyFragment());
         //设置适配器
         viewPag.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
