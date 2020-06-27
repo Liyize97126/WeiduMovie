@@ -21,8 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ChooseSeatActivity"></activity>
-        <!-- 定位配置 -->
+        <activity android:name=".activity.UserInfoActivity"></activity>
+        <activity android:name=".activity.ChooseSeatActivity" /> <!-- 定位配置 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="666c87f66d29137d8daddff383099e14" />

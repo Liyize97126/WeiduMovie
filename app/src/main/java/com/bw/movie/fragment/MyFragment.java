@@ -2,17 +2,15 @@ package com.bw.movie.fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bawei.xtoastlibrary.XToast;
-import com.bawei.xtoastlibrary.utils.AnimationUtils;
 import com.bw.movie.R;
 import com.bw.movie.activity.LoginActivity;
+import com.bw.movie.activity.UserInfoActivity;
 import com.bw.movie.base.BaseFragment;
 import com.bw.movie.base.BasePresenter;
 import com.bw.movie.bean.UserInfo;
@@ -64,13 +62,9 @@ public class MyFragment extends BaseFragment {
                     startActivity(intent);
                 } else {
                     //跳转至用户信息页面
-                    XToast.create(getContext(),"用户已登录！")
-                            .setBackgroundColor(Color.parseColor("#AE15D3"))
-                            .setTextSize(18)
-                            .setTextColor(Color.parseColor("#FFFFFF"))
-                            .setDuration(XToast.XTOAST_DURATION_SHORT)
-                            .setAnimation(AnimationUtils.ANIMATION_DRAWER)
-                            .show();
+                    //跳转
+                    Intent intent = new Intent(getActivity(), UserInfoActivity.class);
+                    startActivity(intent);
                 }
             }
         });

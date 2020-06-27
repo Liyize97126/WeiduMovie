@@ -16,6 +16,7 @@ public class TimesFormatUtil {
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT_THIRD_STYLE_TODAY = new SimpleDateFormat("今天 MM-dd");
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT_THIRD_STYLE_TOMORROW = new SimpleDateFormat("明天 MM-dd");
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT_THIRD_STYLE_AFTER_TOMORROW = new SimpleDateFormat("后天 MM-dd");
+    private static final SimpleDateFormat SIMPLE_DATE_FORMAT_FOURTH = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     //格式转换
     public static String timeFormatFirst(long date) {
         return SIMPLE_DATE_FORMAT_FIRST.format(new Date(date));
@@ -34,5 +35,8 @@ public class TimesFormatUtil {
     }
     public static String timeFormatThirdStyleAfterTomorrow(long date) {
         return SIMPLE_DATE_FORMAT_THIRD_STYLE_AFTER_TOMORROW.format(new Date(date));
+    }
+    public static String timeFormatFourth(long date) {
+        return SIMPLE_DATE_FORMAT_FOURTH.format(new Date(date));
     }
 }
