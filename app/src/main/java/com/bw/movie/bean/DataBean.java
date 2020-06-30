@@ -9,6 +9,7 @@ public class DataBean<T> {
     private T result;
     private String message;
     private String status;
+    private String headPath;
     public T getResult() {
         return result;
     }
@@ -26,5 +27,11 @@ public class DataBean<T> {
     }
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getHeadPath() {
+        return headPath;
+    }
+    public void setHeadPath(String headPath) {
+        this.headPath = headPath;
     }
 }

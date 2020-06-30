@@ -1,5 +1,6 @@
 package com.bw.movie.contract;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.Map;
 
@@ -15,10 +16,13 @@ public interface IContract {
         void getRequest(String url, Type type, Map<String, Object> map, ModelCallBack modelCallBack);
         //Post
         void postRequest(String url, Type type, Map<String, Object> map, ModelCallBack modelCallBack);
+        //图片上传
+        void uploadImageRequest(String url, Type type, File file, ModelCallBack modelCallBack);
     }
     //Presenter
     interface IPresenter {
         void startRequest(int method, String url, Type type, Map<String, Object> map);
+        void startRequest(String url, Type type, File file);
     }
     //View
     interface IView<T> {

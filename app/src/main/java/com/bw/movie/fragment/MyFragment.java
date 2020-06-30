@@ -90,6 +90,10 @@ public class MyFragment extends BaseFragment {
         headPic.setImageURI(Uri.parse(userInfo.getHeadPic()));
         nickName.setText(userInfo.getNickName());
     }
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    public void postUserImage(String url){
+        headPic.setImageURI(Uri.parse(url));
+    }
     @Override
     protected void initDestroyView() {
     }

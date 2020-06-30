@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#161B33">
+
+    <Button
+        android:id="@+id/camera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="拍摄"
+        android:textSize="@dimen/sp_18"
+        android:textAlignment="center"
+        android:textColor="@color/colorTextWrite"
+        android:background="@drawable/button_style_popup_window_button_background"
+        android:padding="@dimen/dp_15"
+        android:layout_marginBottom="@dimen/dp_2"/>
+
+    <Button
+        android:id="@+id/choose_from_album"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="从手机相册选择"
+        android:textSize="@dimen/sp_18"
+        android:textAlignment="center"
+        android:textColor="@color/colorTextWrite"
+        android:background="@drawable/button_style_popup_window_button_background"
+        android:padding="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_2"/>
+
+</LinearLayout>

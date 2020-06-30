@@ -4,6 +4,7 @@ import com.bw.movie.base.BasePresenter;
 import com.bw.movie.contract.IContract;
 import com.bw.movie.model.ModelImpl;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.Map;
 
@@ -53,5 +54,20 @@ public class PresenterImpl extends BasePresenter {
                 });
             }break;
         }
+    }
+    //图片上传请求
+    @Override
+    public void startRequest(String url, Type type, File file) {
+        //上传图片请求
+        mModelImpl.uploadImageRequest(url, type, file, new IContract.ModelCallBack() {
+            @Override
+            public void onSuccess(Object o) {
+                getView().onSuccess(o);
+            }
+            @Override
+            public void onFail(String err) {
+                getView().onFail(err);
+            }
+        });
     }
 }

@@ -10,6 +10,7 @@ import com.bw.movie.url.MyUrl;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -21,8 +22,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -142,6 +146,45 @@ public class NetUtil {
         }*/
         //请求
         request.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+                    //响应结果
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+                        try {
+                            String string = responseBody.string();
+                            Object o = MyApplication.getGson().fromJson(string, type);
+                            if(netCallBack != null){
+                                netCallBack.onSuccess(o);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    //响应错误
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        if(netCallBack !=null){
+                            netCallBack.onFail(e.getMessage());
+                        }
+                    }
+                    //响应完成
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+    //图片上传方法
+    public void uploadImageRequest(String url, final Type type, File file, final NetCallBack netCallBack){
+        //类型转换
+        RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part part = MultipartBody.Part.createFormData("image", file.getName(), body);
+        //执行上传请求
+        mApiService.postUpLoadImage(url,part).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
                     @Override
